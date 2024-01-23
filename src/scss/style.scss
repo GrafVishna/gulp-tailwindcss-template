@@ -1,0 +1,28 @@
+@use "sass:math" as math;
+@import "fonts/fonts";
+@import "base/mixins";
+@import "common";
+@import "template-settings/breakpoints";
+@import "_tailwind";
+
+html,
+body {
+   @apply min-h-screen;
+}
+
+.wrapper {
+   @apply flex flex-col min-h-screen;
+}
+
+.page {
+   @apply flex-auto;
+}
+
+// ? Styles ========================================================================================================================================================
+
+.test {
+   @include adaptiveValue("font-size", 20, 10, 0, 1440, 991);
+   @media (max-width: $tablet) {
+      display: none;
+   }
+}
