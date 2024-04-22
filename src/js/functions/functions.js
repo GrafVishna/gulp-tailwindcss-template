@@ -1,17 +1,3 @@
-// ConsoleLog Log
-import { projectLogger } from '../app.js'
-import logSymbols from "log-symbols"
-export const templateLogger = (message, type) => {
-   let iconType = ''
-   if (type === 'success') iconType = logSymbols.success
-   else if (type === 'info') iconType = logSymbols.info
-   else if (type === 'warning') iconType = logSymbols.warning
-   else if (type === 'error') iconType = logSymbols.error
-
-   if (projectLogger) {
-      console.log(`\n\t${iconType} ${message}`)
-   }
-}
 
 
 // The uniqueization of the array

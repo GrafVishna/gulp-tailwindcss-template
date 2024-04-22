@@ -1,25 +1,28 @@
-const options = require("./config") //options from config.js
+import { config, mainParams } from "./config" //options from config.js
 
-const allPlugins = {
-  typography: require("@tailwindcss/typography"),
-  forms: require("@tailwindcss/forms"),
-  containerQueries: require("@tailwindcss/container-queries"),
-}
+if (mainParams.IS_TAILWIND) {
+  const allPlugins = {
+    typography: require("@tailwindcss/typography"),
+    forms: require("@tailwindcss/forms"),
+    containerQueries: require("@tailwindcss/container-queries"),
+  }
 
-const plugins = Object.keys(allPlugins)
-  .filter((k) => options.plugins[k])
-  .map((k) => {
-    if (k in options.plugins && options.plugins[k]) {
-      return allPlugins[k]
-    }
-  })
+  const plugins = Object.keys(allPlugins)
+    .filter((k) => config.plugins[k])
+    .map((k) => {
+      if (k in config.plugins && config.plugins[k]) {
+        return allPlugins[k]
+      }
+    })
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: ["./src/**/*.{html,htm,scss,js,php}"],
-  darkMode: "class",
-  theme: {
-    extend: {},
-  },
-  plugins: plugins,
+  /** @type {import('tailwindcss').Config} */
+  module.exports = {
+    content: ["./src/**/*.{html,htm,scss,js,php}"],
+    darkMode: "class",
+    theme: {
+      extend: {},
+    },
+    plugins: plugins,
+  }
+
 }

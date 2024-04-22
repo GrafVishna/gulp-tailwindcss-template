@@ -1,9 +1,14 @@
 @use "sass:math" as math;
+// ======================
+// IS TAILWIND===========
+@import "tailwind";
+// ======================
+// ======================
+
 @import "fonts/fonts";
 @import "base/mixins";
 @import "common";
 @import "template-settings/breakpoints";
-@import "_tailwind";
 
 html,
 body {

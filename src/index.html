@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Gulp with TailwindCSS v3</title>
-    <link rel="stylesheet" type="text/css" href="./css/style.css" />
-  </head>
+  @@include('src/components/global/_head.htm', { "title": 'Gulp with TailwindCSS v3' })
   <body class="bg-gray-50">
     <div
       class="bg-gradient-to-r from-red-400 to-pink-400 px-20 pb-44 pt-20 text-center">
@@ -20,12 +14,12 @@
       <div class="space-x-3">
         <a
           class="rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-medium text-white hover:bg-white/50 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:bg-white/70 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
-          href="https://gulp-with-tailwindcss.com/"
+          href="https://github.com/GrafVishna/gulp-tailwindcss-template"
           target="_blank">Documentation</a>
 
         <a
           class="rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-medium text-white hover:bg-white/50 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:bg-white/70 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
-          href="https://github.com/lazymozek/gulp-with-tailwindcss"
+          href="https://github.com/GrafVishna/gulp-tailwindcss-template"
           target="_blank">Github</a>
       </div>
     </div>
@@ -35,7 +29,7 @@
         class="prose-headings:font-display prose prose-slate max-w-full py-0.5 dark:prose-invert prose-headings:scroll-mt-28 prose-headings:font-normal prose-a:font-medium prose-a:text-rose-400 prose-a:no-underline prose-a:underline-offset-2 hover:prose-a:underline prose-pre:rounded-xl prose-pre:bg-slate-900 prose-pre:shadow-lg prose-lead:text-slate-500 dark:text-slate-400 dark:[--tw-prose-background:theme(colors.slate.900)] dark:prose-pre:bg-slate-800/60 dark:prose-pre:shadow-none dark:prose-pre:ring-1 dark:prose-pre:ring-slate-300/10 dark:prose-hr:border-slate-800 dark:prose-lead:text-slate-400 lg:prose-headings:scroll-mt-[8.5rem] [&_.inline-tick]:rounded-md [&_.inline-tick]:bg-slate-300/50 [&_.inline-tick]:px-1.5 [&_.inline-tick]:font-mono [&_.inline-tick]:text-sm [&_.inline-tick]:font-light [&_.inline-tick]:before:hidden [&_.inline-tick]:after:hidden dark:[&_.inline-tick]:bg-slate-600/50">
         <img
           class="rounded shadow transition-shadow duration-500 hover:shadow-lg"
-          src="img/cover.jpg"
+          src="@img/2.jpg"
           alt="Gulp with TailwindCSS" />
 
         <h3>Features</h3>
@@ -83,7 +77,9 @@
         </ul>
       </div>
     </div>
+    <div>
 
+    </div>
     <script src="./js/scripts.js"></script>
   </body>
 </html>

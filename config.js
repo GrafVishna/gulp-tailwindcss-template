@@ -1,4 +1,15 @@
-const config = {
+// ================================
+// ================================
+export const mainParams = {
+  IS_TAILWIND: true,
+  WEBP_COMPRESS: 80,
+  JPEG_COMPRESS: 80,
+  PNG_COMPRESS: [0.7, 0.7],
+}
+// ================================
+// ================================
+
+export const config = {
   tailwindjs: "./tailwind.config.js",
   port: 4000,
   purgecss: {
@@ -7,28 +18,38 @@ const config = {
       standard: [/^pre/, /^code/],
       greedy: [/token.*/],
     },
+    defaultExtractor: (content) => {
+      const v3Regex = /[(\([&*\])|\w)-:./]+(?<!:)/g
+      const broadMatches = content.match(v3Regex) || []
+      const innerMatches =
+        content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
+      return broadMatches.concat(innerMatches)
+    },
   },
   webp: {
-    quality: 80 // Webp quality
+    quality: mainParams.WEBP_COMPRESS // Webp quality
   },
   imagemin: {
     progressive: true,
     svgoPlugins: [{ removeViewBox: false }],
     interlaced: true,
-    png: [0.7, 0.7], // Png quality
-    jpeg: 80, // Jpeg quality
+    png: mainParams.PNG_COMPRESS, // Png quality
+    jpeg: mainParams.JPEG_COMPRESS, // Jpeg quality
   },
-}
 
-// tailwind plugins
-const plugins = {
-  typography: true,
-  forms: true,
-  containerQueries: true,
+  include: {
+    prefix: '@@',
+    basepath: '@root'
+  },
+
+  plugins: {
+    typography: true,
+    forms: true,
+    containerQueries: true,
+  }
 }
 
 // Project Paths
-const buildFolder = `./build`
 const distFolder = `./dist`
 const srcFolder = `./src`
 
@@ -40,32 +61,16 @@ export const gulpPaths = {
     images: `${distFolder}/img/`,
     fonts: `${distFolder}/fonts/`,
     files: `${distFolder}/files/`,
-    thirdParty: `${distFolder}/thirdParty/`
-  },
-  build: {
-    base: `${buildFolder}/`,
-    js: `${buildFolder}/js/`,
-    css: `${buildFolder}/css/`,
-    images: `${buildFolder}/img/`,
-    fonts: `${buildFolder}/fonts/`,
-    files: `${buildFolder}/files/`,
-    thirdParty: `${buildFolder}/thirdParty/`
   },
   src: {
+    root: `${srcFolder}/`,
     base: `${srcFolder}/*.html`,
+    components: `${srcFolder}/components/`,
     js: `${srcFolder}/js/`,
     scss: `${srcFolder}/scss/`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp}`,
     fonts: `${srcFolder}/fonts/`,
     files: `${srcFolder}/files/**/*.*`,
-    thirdParty: `${srcFolder}/thirdParty/**/*.*`,
   },
 }
 
-const exportConfig = {
-  config,
-  plugins,
-  gulpPaths
-}
-
-export default exportConfig
