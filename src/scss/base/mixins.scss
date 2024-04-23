@@ -1,5 +1,3 @@
-@import "../template-settings/global";
-
 $containerWidth: $maxWidthContainer + $containerPadding;
 //Percent
 @function percent($px, $from: 100) {

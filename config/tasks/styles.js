@@ -36,9 +36,7 @@ export function prodStyles() {
    return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sass().on("error", sass.logError))
 
-      .pipe(
-         purgecss({ ...config.purgecss, })
-      )
+      .pipe(purgecss({ ...config.purgecss, }))
       .pipe(mainParams.IS_TAILWIND ? postcss([tailwindcss(config.tailwindjs), autoprefixer()]) : postcss([autoprefixer()]))
       .pipe(replaceAliasSCSS())
       .pipe(concat({ path: "style.css" }))

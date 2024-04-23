@@ -8,12 +8,8 @@ if (mainParams.IS_TAILWIND) {
   }
 
   const plugins = Object.keys(allPlugins)
-    .filter((k) => config.plugins[k])
-    .map((k) => {
-      if (k in config.plugins && config.plugins[k]) {
-        return allPlugins[k]
-      }
-    })
+    .filter((key) => config.plugins[key])
+    .map((key) => { if (key in config.plugins && config.plugins[key]) { return allPlugins[key] } })
 
   /** @type {import('tailwindcss').Config} */
   module.exports = {
@@ -24,5 +20,4 @@ if (mainParams.IS_TAILWIND) {
     },
     plugins: plugins,
   }
-
 }

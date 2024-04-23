@@ -1,33 +1,34 @@
 @use "sass:math" as math;
 // ======================
+// Global Settings! =====
+$minWidth: 320;
+// The width of the canvas (layout)
+$maxWidth: 1920;
+// The width of the restrictive container
+$maxWidthContainer: 1290; // (0 = no restriction)
+// General indentation from a container
+$containerPadding: 30; // (30 = 15px left and right, 0 = no retreat)
+// Mixins
+@import "base/mixins";
+// Breikpoints
+$tablet: em(991.98); // tablets, some phones in horizontal position
+$mobile: em(767.98); // phones l
+$mobileSmall: em(479.98); // phones with
+
+// RESET ================
+// @import "base/null";
 // IS TAILWIND===========
 @import "tailwind";
 // ======================
-// ======================
-
+// Global ===============
+@import "base/global";
+// FONTS ================
 @import "fonts/fonts";
-@import "base/mixins";
+// @import "fonts/icons";
+// COMMON ===============
 @import "common";
-@import "template-settings/breakpoints";
 
-html,
-body {
-   @apply min-h-screen;
-}
-
-.wrapper {
-   @apply flex flex-col min-h-screen;
-}
-
-.page {
-   @apply flex-auto;
-}
+// ? Pages ========================================================================================================================================================
+@import "pages/home";
 
 // ? Styles ========================================================================================================================================================
-
-.test {
-   @include adaptiveValue("font-size", 20, 10, 0, 1440, 991);
-   @media (max-width: $tablet) {
-      display: none;
-   }
-}

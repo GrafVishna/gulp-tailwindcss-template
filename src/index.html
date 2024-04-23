@@ -1,85 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+  <!-- Head -->
   @@include('src/components/global/_head.htm', { "title": 'Gulp with TailwindCSS v3' })
-  <body class="bg-gray-50">
-    <div
-      class="bg-gradient-to-r from-red-400 to-pink-400 px-20 pb-44 pt-20 text-center">
-      <h1 class="hero-heading">
-        <a href="./" class="text-inherit no-underline">Gulp with TailwindCSS v3 Kit</a>
-      </h1>
-      <p class="test mb-10 w-full text-center text-xl leading-5 text-white">
-        Updated with Tailwind v3.3, PostCSS v8.0+
-      </p>
+  <body>
+    <div class="wrapper">
+      <div class="relative" x-data="{ state: false }">
+        <div
+          class="absolute inset-0 blur-xl h-[100vh]"
+          style="
+            background: linear-gradient(
+              143.6deg,
+              rgba(192, 132, 252, 0) 20.79%,
+              rgba(232, 121, 249, 0.26) 40.92%,
+              rgba(204, 171, 238, 0) 70.35%
+            );
+          "></div>
+        <div class="relative">
+          <section>
+            <div
+              class="max-w-screen-xl h-screen mx-auto px-4 py-28 gap-12 text-gray-600 overflow-hidden md:px-8 flex ">
+              <div class="space-y-5 max-w-xl flex flex-col justify-center">
+                <h1 class="text-4xl text-gray-800 font-extrabold sm:text-5xl">
+                  Design your website exactly the way you want
+                </h1>
+                <p>
+                  You can use TailwindCSS, or your own SCSS.
+                </p>
+                <div class="flex items-center gap-x-3 sm:text-sm">
+                  <a
+                    href="home.html"
+                    target="_blank"
+                    class="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 duration-150 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex">
+                    Get home file
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                      class="w-5 h-5">
+                      <path
+                        fillRule="evenodd"
+                        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                        clipRule="evenodd" />
+                    </svg>
+                  </a>
 
-      <div class="space-x-3">
-        <a
-          class="rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-medium text-white hover:bg-white/50 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:bg-white/70 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
-          href="https://github.com/GrafVishna/gulp-tailwindcss-template"
-          target="_blank">Documentation</a>
+                </div>
+              </div>
 
-        <a
-          class="rounded-full border border-white/40 bg-white/40 px-5 py-2 text-sm font-medium text-white hover:bg-white/50 focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/50 active:bg-white/70 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800"
-          href="https://github.com/GrafVishna/gulp-tailwindcss-template"
-          target="_blank">Github</a>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
-    <div
-      class="mx-auto -mt-32 mb-24 max-w-3xl rounded-lg bg-white p-10 shadow-lg">
-      <div
-        class="prose-headings:font-display prose prose-slate max-w-full py-0.5 dark:prose-invert prose-headings:scroll-mt-28 prose-headings:font-normal prose-a:font-medium prose-a:text-rose-400 prose-a:no-underline prose-a:underline-offset-2 hover:prose-a:underline prose-pre:rounded-xl prose-pre:bg-slate-900 prose-pre:shadow-lg prose-lead:text-slate-500 dark:text-slate-400 dark:[--tw-prose-background:theme(colors.slate.900)] dark:prose-pre:bg-slate-800/60 dark:prose-pre:shadow-none dark:prose-pre:ring-1 dark:prose-pre:ring-slate-300/10 dark:prose-hr:border-slate-800 dark:prose-lead:text-slate-400 lg:prose-headings:scroll-mt-[8.5rem] [&_.inline-tick]:rounded-md [&_.inline-tick]:bg-slate-300/50 [&_.inline-tick]:px-1.5 [&_.inline-tick]:font-mono [&_.inline-tick]:text-sm [&_.inline-tick]:font-light [&_.inline-tick]:before:hidden [&_.inline-tick]:after:hidden dark:[&_.inline-tick]:bg-slate-600/50">
-        <img
-          class="rounded shadow transition-shadow duration-500 hover:shadow-lg"
-          src="@img/2.jpg"
-          alt="Gulp with TailwindCSS" />
-
-        <h3>Features</h3>
-        <ul>
-          <li>
-            Easy configuration using
-            <span class="inline-tick">config.js</span>
-          </li>
-          <li>Live reload on file/assets changes using browser-sync</li>
-          <li>SCSS support with auto purge css</li>
-          <li>Minification of styles and scripts on production build</li>
-          <li>
-            Minification of images on production build using
-            <span class="inline-tick">imagemin</span>
-          </li>
-          <li>
-            Includes following tailwindcss plugins (can be disabled/enabled with
-            <span class="inline-tick">config.js</span>)
-          </li>
-          <ul>
-            <li>
-              <a
-                target="_blank"
-                href="https://github.com/tailwindlabs/tailwindcss-forms">@tailwindcss/forms</a>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://tailwindcss.com/docs/typography-plugin">@tailwindcss/typography</a>
-            </li>
-            <li data-da=".test, 991, last">
-              <a
-                target="_blank"
-                href="https://github.com/tailwindlabs/tailwindcss-container-queries">@tailwindcss/container-queries</a>
-            </li>
-            <li data-watch>
-              <span class="line-through">
-                <a
-                  target="_blank"
-                  href="https://github.com/tailwindlabs/tailwindcss-line-clamp">@tailwindcss/line-clamp</a>
-              </span>
-              - Added by default in Tailwind v3.3 release
-            </li>
-          </ul>
-        </ul>
-      </div>
-    </div>
-    <div>
-
-    </div>
-    <script src="./js/scripts.js"></script>
+    <!-- Scripts js -->
+    @@include('src/components/global/_scripts.htm', {})
   </body>
 </html>
