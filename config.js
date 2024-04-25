@@ -1,4 +1,11 @@
-const config = {
+export const mainParams = {
+  IS_TAILWIND: true,
+  WEBP_COMPRESS: 80,
+  JPEG_COMPRESS: 80,
+  PNG_COMPRESS: [0.7, 0.7],
+}
+
+export const config = {
   tailwindjs: "./tailwind.config.js",
   port: 4000,
   purgecss: {
@@ -8,20 +15,28 @@ const config = {
       greedy: [/token.*/],
     },
   },
-  webp: {
-    quality: 80 // Webp quality
+
+  include: {
+    prefix: '@@',
+    basepath: '@root'
   },
+
+  webp: {
+    quality: mainParams.WEBP_COMPRESS // Webp quality
+  },
+
   imagemin: {
     progressive: true,
     svgoPlugins: [{ removeViewBox: false }],
     interlaced: true,
-    png: [0.7, 0.7], // Png quality
-    jpeg: 80, // Jpeg quality
+    png: mainParams.PNG_COMPRESS, // Png quality
+    jpeg: mainParams.JPEG_COMPRESS, // Jpeg quality
   },
 }
 
+
 // tailwind plugins
-const plugins = {
+export const plugins = {
   typography: true,
   forms: true,
   containerQueries: true,
@@ -29,7 +44,7 @@ const plugins = {
 
 // Project Paths
 const buildFolder = `./build`
-const distFolder = `./dist`
+const distFolder = `./.tmp`
 const srcFolder = `./src`
 
 export const gulpPaths = {
@@ -52,20 +67,13 @@ export const gulpPaths = {
     thirdParty: `${buildFolder}/thirdParty/`
   },
   src: {
-    base: `${srcFolder}/*.html`,
+    base: `${srcFolder}/`,
     js: `${srcFolder}/js/`,
     scss: `${srcFolder}/scss/`,
+    components: `${srcFolder}/components/`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp}`,
     fonts: `${srcFolder}/fonts/`,
     files: `${srcFolder}/files/**/*.*`,
     thirdParty: `${srcFolder}/thirdParty/**/*.*`,
   },
 }
-
-const exportConfig = {
-  config,
-  plugins,
-  gulpPaths
-}
-
-export default exportConfig

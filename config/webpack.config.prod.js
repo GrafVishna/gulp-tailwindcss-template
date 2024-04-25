@@ -5,8 +5,11 @@ import { gulpPaths } from "../config.js"
 // =========================================================================================================================
 
 // todo Path build JS
+const srcFolder = "src"
+const buildFolder = "build"
 const paths = {
-   build: path.resolve(new URL('.', import.meta.url).pathname, gulpPaths.build.js),
+   src: path.resolve(srcFolder),
+   build: path.resolve(buildFolder)
 }
 
 // todo Config JS
@@ -58,10 +61,16 @@ const configImages = {
    },
 }
 
+
 // todo Config Common
 const commonConfig = {
    mode: 'production',
-   entry: `${gulpPaths.src.js}app.js`,
+   entry: [
+      `${paths.src}/js/app.js`
+   ],
+   output: {
+      filename: 'app.js',
+   },
    module: {
       rules: [configJs, configStyles, configImages],
    },
@@ -74,30 +83,15 @@ const webpackProd = {
    cache: {
       type: 'filesystem',
    },
-   output: {
-      filename: 'scripts.js',
-      pathinfo: false,
-      path: paths.build,
-      environment: {
-         module: false,
-      },
-   },
-   optimization: {
-      minimize: false,
-      minimizer: [new TerserPlugin({ extractComments: false })],
-   },
 }
 
 // Min =========================================================================================================================
 
 const webpackProdMin = {
    ...commonConfig,
-   output: {
-      filename: 'scripts.min.js',
-      path: paths.build,
-   },
    optimization: {
       minimize: true,
+      minimizer: [new TerserPlugin({ extractComments: false })],
    },
 }
 

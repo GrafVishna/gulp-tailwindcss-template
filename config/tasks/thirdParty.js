@@ -1,16 +1,35 @@
-import gulp from 'gulp'
-const { src, dest } = gulp
+import pkg from 'gulp'
+const { src, dest } = pkg
+import newer from 'gulp-newer'
 import { gulpPaths } from "../../config.js"
 
-export function devThirdParty() {
-   return src(gulpPaths.src.thirdParty).pipe(
-      dest(gulpPaths.dist.thirdParty)
-   )
+//========================================================================================================================================================
+
+/**
+ * Copy third-party libraries from source to dist.
+ *
+ * This task copies third-party libraries from the source folder to the dist
+ * folder. It is used to ensure that all third-party libraries are copied to
+ * the dist folder regardless of whether they are referenced in the HTML.
+ *
+ * @param {string} processPath - The path where the files will be processed.
+ * @returns {Object} - gulp stream
+ */
+
+export const devThirdParty = (done) => {
+   thirdParty(gulpPaths.dist.files)
+   done()
 }
 
+export const prodThirdParty = (done) => {
+   thirdParty(gulpPaths.build.files)
+   done()
+}
 
-export function prodThirdParty() {
-   return src(gulpPaths.src.thirdParty).pipe(
-      dest(gulpPaths.build.thirdParty)
-   )
+function thirdParty(processPath) {
+   // Copy third-party libraries from source to dist
+   return src(gulpPaths.src.files)
+      .pipe(newer(processPath))
+      // Copy files to dist
+      .pipe(dest(processPath))
 }

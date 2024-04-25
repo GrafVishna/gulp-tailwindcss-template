@@ -9,25 +9,26 @@ import postcss from "gulp-postcss"
 import concat from "gulp-concat"
 import cssnano from "cssnano"
 import purgecss from "gulp-purgecss"
-import options from "../../config.js"
-const { gulpPaths, config } = options
+import { gulpPaths, config, mainParams } from "../../config.js"
+import { replaceAliasSCSS } from "./replaceHtml.js"
 
 
 export function devStyles() {
 
-   return src(`${gulpPaths.src.scss}style.scss`)
+   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sass().on("error", sass.logError))
       .pipe(postcss([tailwindcss(config.tailwindjs), autoprefixer()]))
       .pipe(concat({ path: "style.css" }))
+      .pipe(replaceAliasSCSS())
       .pipe(dest(gulpPaths.dist.css))
 }
 
 export function prodStyles() {
-   return src(`${gulpPaths.src.scss}style.scss`)
+   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sass().on("error", sass.logError))
       .pipe(
          postcss([
-            tailwindcss(config.tailwindjs),
+            mainParams.IS_TAILWIND && tailwindcss(config.tailwindjs),
             autoprefixer(),
             cssnano(),
          ])
@@ -44,5 +45,7 @@ export function prodStyles() {
             },
          })
       )
+      .pipe(replaceAliasSCSS())
+      .pipe(concat({ path: "style.css" }))
       .pipe(dest(gulpPaths.build.css))
 }

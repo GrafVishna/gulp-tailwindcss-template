@@ -7,7 +7,9 @@
   "version": "2.2.0",
   "description": "TailwindCSS StarterKit with Gulp 4",
   "main": "gulpfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-ttf2woff": "^1.1.1"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
@@ -31,6 +33,7 @@
     "gulp-imagemin": "7.1.0",
     "gulp-newer": "^1.4.0",
     "gulp-notify": "^4.0.0",
+    "gulp-path-alias": "^1.2.1",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.1",
     "gulp-prettier": "^6.0.0",
