@@ -37,7 +37,13 @@ Generate build files for production server
 yarn dev // or // npm run dev (No Webp)
 ```
 
-without converting images in 
+Project build without converting images 
+
+```sh
+yarn build // or // npm run build (No Webp)
+```
+
+Project build with image converting
 
 ```sh
 yarn webp // or // npm run webp (Webp)
