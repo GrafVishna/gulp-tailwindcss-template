@@ -1,5 +1,5 @@
-
-import { src, dest } from 'gulp'
+import pkg from 'gulp'
+const { src, dest } = pkg
 import imagemin from "gulp-imagemin"
 import webp from "gulp-webp"
 import newer from 'gulp-newer'
@@ -42,7 +42,7 @@ export const imageOptimize = () => {
       // Optimize images
       .pipe(imagemin({ ...config.imagemin }))
       // Copy optimized images to the dist folder
-      .pipe(dest(gulpPaths.dist.images))
+      .pipe(dest(gulpPaths.build.images))
 
 }
 //========================================================================================================================================================
@@ -57,7 +57,7 @@ export const imgWebp = () => {
    // Optimize images
    // imageOptimize()
    // Generate WebP versions of images
-   return src(`${gulpPaths.dist.images}**/*.{jpg,jpeg,png,gif}`, { encoding: false })
+   return src(`${gulpPaths.build.images}**/*.{jpg,jpeg,png,gif}`, { encoding: false })
       .pipe(gulpPlumber(
          notify.onError({
             title: "IMAGE-WEBP",
@@ -66,7 +66,7 @@ export const imgWebp = () => {
       )
       .pipe(webp(config.webp))
       // Copy optimized WebP images to the dist folder
-      .pipe(dest(gulpPaths.dist.images))
+      .pipe(dest(gulpPaths.build.images))
 }
 //========================================================================================================================================================
 

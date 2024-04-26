@@ -1,4 +1,5 @@
-import { src, dest } from 'gulp'
+import gulp from 'gulp'
+const { src, dest } = gulp
 import tailwindcss from "tailwindcss"
 import autoprefixer from "autoprefixer"
 import dartSass from 'sass'
@@ -7,39 +8,44 @@ const sass = gulpSass(dartSass)
 import postcss from "gulp-postcss"
 import concat from "gulp-concat"
 import cssnano from "cssnano"
-import { replaceAliasSCSS } from "./replaceHtml.js"
 import purgecss from "gulp-purgecss"
-import { config, gulpPaths, mainParams } from "../../config.js"
+import { gulpPaths, config, mainParams } from "../../config.js"
+import { replaceAliasSCSS } from "./replaceHtml.js"
 
-/**
- * Compiles stylesheets from SCSS to CSS
- *
- * @description
- * Compiles stylesheets from SCSS to CSS and applies TailwindCSS, autoprefixer,
- * and concatenates the resulting CSS to a single file.
- *
- * @returns {object}
- */
+
 export function devStyles() {
-   // Compile SCSS to CSS
+
    return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sass().on("error", sass.logError))
-      // Apply TailwindCSS, autoprefixer and concatenate to style.css
-      .pipe(mainParams.IS_TAILWIND ? postcss([tailwindcss(config.tailwindjs), autoprefixer()]) : postcss([autoprefixer()]))
+      .pipe(postcss([tailwindcss(config.tailwindjs), autoprefixer()]))
       .pipe(concat({ path: "style.css" }))
       .pipe(replaceAliasSCSS())
       .pipe(dest(gulpPaths.dist.css))
 }
-
 
 export function prodStyles() {
    return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sass().on("error", sass.logError))
-
-      .pipe(purgecss({ ...config.purgecss, }))
-      .pipe(mainParams.IS_TAILWIND ? postcss([tailwindcss(config.tailwindjs), autoprefixer()]) : postcss([autoprefixer()]))
+      .pipe(
+         postcss([
+            mainParams.IS_TAILWIND && tailwindcss(config.tailwindjs),
+            autoprefixer(),
+            cssnano(),
+         ])
+      )
+      .pipe(
+         purgecss({
+            ...config.purgecss,
+            defaultExtractor: (content) => {
+               const v3Regex = /[(\([&*\])|\w)-:./]+(?<!:)/g
+               const broadMatches = content.match(v3Regex) || []
+               const innerMatches =
+                  content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
+               return broadMatches.concat(innerMatches)
+            },
+         })
+      )
       .pipe(replaceAliasSCSS())
       .pipe(concat({ path: "style.css" }))
-      .pipe(dest(gulpPaths.dist.css))
+      .pipe(dest(gulpPaths.build.css))
 }
-

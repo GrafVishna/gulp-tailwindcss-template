@@ -2,9 +2,9 @@ import { config, mainParams } from "./config" //options from config.js
 
 if (mainParams.IS_TAILWIND) {
   const allPlugins = {
-    typography: require("@tailwindcss/typography"),
-    forms: require("@tailwindcss/forms"),
-    containerQueries: require("@tailwindcss/container-queries"),
+    // typography: require("@tailwindcss/typography"),
+    // forms: require("@tailwindcss/forms"),
+    // containerQueries: require("@tailwindcss/container-queries"),
   }
 
   const plugins = Object.keys(allPlugins)

@@ -1,24 +1,31 @@
-
-import { src, dest } from 'gulp'
-import { readdir } from 'fs'
-import * as fs from 'fs'
+import pkg from 'gulp'
+const { src, dest, series, parallel } = pkg
 import fonter from 'gulp-fonter-fix'
+import ttf2woff from 'gulp-ttf2woff' // Додана бібліотека для конвертації в WOFF
 import ttf2woff2 from 'gulp-ttf2woff2'
 import plumber from 'gulp-plumber'
 import notify from 'gulp-notify'
 import path from 'path'
+import fs from 'fs'
 import { gulpPaths } from "../../config.js"
 
-//========================================================================================================================================================
+const { readdir } = fs
+const fontsDir = path.resolve(`src/fonts`)
 
-/**
- * Converts otf fonts to ttf fonts
- * @gulpTask otfToTtf
- * @function
- * @param {void} none - No param needed.
- * @return {object} gulp - Gulp object.
- */
-export const otfToTtf = () => {
+export const devFonts = (done) => {
+   otfToTtf()
+   ttfToWoff2(gulpPaths.dist.fonts)
+   woff2Copy(gulpPaths.dist.fonts)
+   done()
+}
+export const prodFonts = (done) => {
+   otfToTtf()
+   ttfToWoff2(gulpPaths.build.fonts)
+   woff2Copy(gulpPaths.build.fonts)
+   done()
+}
+
+const otfToTtf = () => {
    // Create fonts directory if doesn't exist
    const fontsDir = path.resolve(`src/fonts`)
    if (!fs.existsSync(fontsDir)) {
@@ -48,7 +55,7 @@ export const otfToTtf = () => {
  * @param {void} none - No param needed.
  * @return {object} gulp - Gulp object.
  */
-export const ttfToWoff2 = () => {
+const ttfToWoff2 = (processPath) => {
    // Read ttf fonts in src/fonts directory and convert to woff2 format
    return src(`${gulpPaths.src.fonts}*.ttf`, { encoding: false })
       .pipe(plumber(
@@ -63,18 +70,11 @@ export const ttfToWoff2 = () => {
       // Convert ttf fonts to woff2 format
       .pipe(ttf2woff2())
       // Pipe converted fonts to dist/fonts directory
-      .pipe(dest(`${gulpPaths.dist.fonts}`))
+      .pipe(dest(`${processPath}`))
 }
 //========================================================================================================================================================
 
-/**
- * Copy woff2 fonts from src/fonts to dist/fonts directory
- * @gulpTask woff2Copy
- * @function
- * @param {void} none - No param needed.
- * @return {object} gulp - Gulp object.
- */
-export const woff2Copy = () => {
+const woff2Copy = (processPath) => {
    // Read woff2 fonts in src/fonts directory and copy to dist/fonts directory
    return src(`${gulpPaths.src.fonts}*.woff2`, { encoding: false })
       .pipe(plumber(
@@ -83,8 +83,9 @@ export const woff2Copy = () => {
             message: "Error: <%= error.message %>" // Notification message
          }))
       )
-      .pipe(dest(`${gulpPaths.dist.fonts}`)) // Pipe converted fonts to dist/fonts directory
+      .pipe(dest(`${processPath}`)) // Pipe converted fonts to dist/fonts directory
 }
+
 //========================================================================================================================================================
 
 /**
@@ -110,9 +111,7 @@ export const fontsStyle = () => {
             // Check if this is a new font, to avoid duplicate font faces
             if (newFileOnly !== fontFileName) {
                // Get font name from file name
-               let fontName = fontFileName.split("-")[0]
-                  ? fontFileName.split("-")[0]
-                  : fontFileName
+               let fontName = fontFileName.replace(/[^a-zA-Z0-9]+/g, '')
                // Get font weight from file name
                let fontWeight = fontFileName.split("-")[1]
                   ? fontFileName.split("-")[1]

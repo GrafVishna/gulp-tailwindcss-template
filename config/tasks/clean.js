@@ -1,27 +1,27 @@
 import gulp from 'gulp'
 const { src } = gulp
 import clean from "gulp-clean"
-import { gulpPaths } from "../../config.js"
-import { templateLogger } from '../../helpers/helpers.js'
-//========================================================================================================================================================
-
-/**
- * Clean task
- *
- * @description Cleans dist folder.
- *
- * @returns {object} stream - The stream of the clean task.
- */
-export function cleaner() {
-   // Logs info about the task
-   templateLogger('Cleaning dist folder.', 'info')
-
-   // Cleans the dist folder
-   return src(gulpPaths.dist.base, { read: false, allowEmpty: true })
-      // Pipes the stream to `gulp-clean` plugin
-      .pipe(
-         clean()
-      )
+const logSymbols = {
+   success: '✅',
+   info: '🚩',
+   warning: '❗',
+   error: '❌',
+   clock: '⌛',
+   question: '👀',
+   alarm: '🚨',
+   star: '🌟'
 }
-//========================================================================================================================================================
+import { gulpPaths } from "../../config.js"
+export function devClean() {
+   console.log("\n\t" + logSymbols.info, "Cleaning dist folder for fresh start.\n")
+   return src(gulpPaths.dist.base, { read: false, allowEmpty: true }).pipe(
+      clean()
+   )
+}
 
+export function prodClean() {
+   console.log("\n\t" + logSymbols.info, "Cleaning build folder for fresh start.\n")
+   return src(gulpPaths.build.base, { read: false, allowEmpty: true }).pipe(
+      clean()
+   )
+}

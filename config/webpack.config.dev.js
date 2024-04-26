@@ -1,6 +1,6 @@
 import * as path from 'path'
 import { gulpPaths } from "../config.js"
-
+import TerserPlugin from 'terser-webpack-plugin'
 // =========================================================================================================================
 // todo Config JS
 const configJs = {
@@ -13,6 +13,14 @@ const configJs = {
       },
    },
 }
+
+const srcFolder = "src"
+const distFolder = ".tmp"
+const paths = {
+   src: path.resolve(srcFolder),
+   dist: path.resolve(distFolder)
+}
+
 // todo Config CSS & SCSS
 const configStyles = {
    test: /\.(scss|css)$/,
@@ -55,15 +63,20 @@ const configImages = {
 const webpackDev = {
    mode: 'development',
    cache: true,
-   devtool: 'eval-cheap-source-map',
-   entry: `${gulpPaths.src.js}app.js`,
-   output: {
-      filename: 'scripts.js',
-      path: path.resolve(new URL('.', import.meta.url).pathname, gulpPaths.dist.js),
-   },
+   // devtool: 'eval-cheap-source-map',
+   entry: [
+      `${paths.src}/js/app.js`
+   ],
    module: {
       rules: [configJs, configStyles, configImages],
    },
+   output: {
+      filename: 'app.js',
+   },
+   performance: {
+      hints: false
+   }
 }
+
 
 export { webpackDev }

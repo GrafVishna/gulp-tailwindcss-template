@@ -1,13 +1,9 @@
-// ================================
-// ================================
 export const mainParams = {
   IS_TAILWIND: true,
   WEBP_COMPRESS: 80,
   JPEG_COMPRESS: 80,
   PNG_COMPRESS: [0.7, 0.7],
 }
-// ================================
-// ================================
 
 export const config = {
   tailwindjs: "./tailwind.config.js",
@@ -18,23 +14,6 @@ export const config = {
       standard: [/^pre/, /^code/],
       greedy: [/token.*/],
     },
-    defaultExtractor: (content) => {
-      const v3Regex = /[(\([&*\])|\w)-:./]+(?<!:)/g
-      const broadMatches = content.match(v3Regex) || []
-      const innerMatches =
-        content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
-      return broadMatches.concat(innerMatches)
-    },
-  },
-  webp: {
-    quality: mainParams.WEBP_COMPRESS // Webp quality
-  },
-  imagemin: {
-    progressive: true,
-    svgoPlugins: [{ removeViewBox: false }],
-    interlaced: true,
-    png: mainParams.PNG_COMPRESS, // Png quality
-    jpeg: mainParams.JPEG_COMPRESS, // Jpeg quality
   },
 
   include: {
@@ -42,15 +21,30 @@ export const config = {
     basepath: '@root'
   },
 
-  plugins: {
-    typography: true,
-    forms: true,
-    containerQueries: true,
-  }
+  webp: {
+    quality: mainParams.WEBP_COMPRESS // Webp quality
+  },
+
+  imagemin: {
+    progressive: true,
+    svgoPlugins: [{ removeViewBox: false }],
+    interlaced: true,
+    png: mainParams.PNG_COMPRESS, // Png quality
+    jpeg: mainParams.JPEG_COMPRESS, // Jpeg quality
+  },
+}
+
+
+// tailwind plugins
+export const plugins = {
+  typography: true,
+  forms: true,
+  containerQueries: true,
 }
 
 // Project Paths
-const distFolder = `./dist`
+const buildFolder = `./build`
+const distFolder = `./.tmp`
 const srcFolder = `./src`
 
 export const gulpPaths = {
@@ -61,16 +55,25 @@ export const gulpPaths = {
     images: `${distFolder}/img/`,
     fonts: `${distFolder}/fonts/`,
     files: `${distFolder}/files/`,
+    thirdParty: `${distFolder}/thirdParty/`
+  },
+  build: {
+    base: `${buildFolder}/`,
+    js: `${buildFolder}/js/`,
+    css: `${buildFolder}/css/`,
+    images: `${buildFolder}/img/`,
+    fonts: `${buildFolder}/fonts/`,
+    files: `${buildFolder}/files/`,
+    thirdParty: `${buildFolder}/thirdParty/`
   },
   src: {
-    root: `${srcFolder}/`,
-    base: `${srcFolder}/*.html`,
-    components: `${srcFolder}/components/`,
+    base: `${srcFolder}/`,
     js: `${srcFolder}/js/`,
     scss: `${srcFolder}/scss/`,
+    components: `${srcFolder}/components/`,
     images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp}`,
     fonts: `${srcFolder}/fonts/`,
     files: `${srcFolder}/files/**/*.*`,
+    thirdParty: `${srcFolder}/thirdParty/**/*.*`,
   },
 }
-

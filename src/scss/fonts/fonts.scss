@@ -1,23 +1,11 @@
 
 /**
- * ChopinScript font face
+ * Blacksword font face
  */
 @font-face {
-   font-family: ChopinScript;
+   font-family: Blacksword;
    font-display: swap;
-   src: url("../fonts/ChopinScript.woff2") format("woff2"), url("../fonts/ChopinScript.woff") format("woff");
-   font-weight: 400;
-   font-style: normal;
-}
-
-
-/**
- * JellykaEndlessVoyage font face
- */
-@font-face {
-   font-family: JellykaEndlessVoyage;
-   font-display: swap;
-   src: url("../fonts/JellykaEndlessVoyage.woff2") format("woff2"), url("../fonts/JellykaEndlessVoyage.woff") format("woff");
+   src: url("../fonts/Blacksword.woff2") format("woff2"), url("../fonts/Blacksword.woff") format("woff");
    font-weight: 400;
    font-style: normal;
 }

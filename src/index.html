@@ -1,58 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
-  <!-- Head -->
-  @@include('src/components/global/_head.htm', { "title": 'Gulp with TailwindCSS v3' })
-  <body>
-    <div class="wrapper">
-      <div class="relative" x-data="{ state: false }">
-        <div
-          class="absolute inset-0 blur-xl h-[100vh]"
-          style="
+   <!-- Head -->
+   @@include('src/components/global/_head.htm', { "title": 'Home page' })
+   <body>
+      <style>
+         body {
             background: linear-gradient(
-              143.6deg,
-              rgba(192, 132, 252, 0) 20.79%,
-              rgba(232, 121, 249, 0.26) 40.92%,
-              rgba(204, 171, 238, 0) 70.35%
+               143.6deg,
+               rgba(192, 132, 252, 0) 20.79%,
+               rgba(232, 121, 249, 0.26) 40.92%,
+               rgba(204, 171, 238, 0) 70.35%
             );
-          "></div>
-        <div class="relative">
-          <section>
-            <div
-              class="max-w-screen-xl h-screen mx-auto px-4 py-28 gap-12 text-gray-600 overflow-hidden md:px-8 flex ">
-              <div class="space-y-5 max-w-xl flex flex-col justify-center">
-                <h1 class="text-4xl text-gray-800 font-extrabold sm:text-5xl">
-                  Design your website exactly the way you want
-                </h1>
-                <p>
-                  You can use TailwindCSS, or your own SCSS.
-                </p>
-                <div class="flex items-center gap-x-3 sm:text-sm">
-                  <a
-                    href="home.html"
-                    target="_blank"
-                    class="flex items-center justify-center gap-x-1 py-2 px-4 text-white font-medium bg-gray-800 duration-150 hover:bg-gray-700 active:bg-gray-900 rounded-full md:inline-flex">
-                    Get home file
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      class="w-5 h-5">
-                      <path
-                        fillRule="evenodd"
-                        d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                        clipRule="evenodd" />
-                    </svg>
-                  </a>
-
-                </div>
-              </div>
-
+         }
+         .page__container {
+            height: 100vh;
+         }
+         .hero {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+         }
+         .content {
+            max-width: 36rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            gap: 15px;
+         }
+         .content h1 {
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 800;
+            color: rgba(31, 41, 55, 1);
+         }
+         .content p {
+            color: rgba(75, 85, 99, 1);
+            font-size: 16px;
+         }
+         .content a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition-duration: 150ms;
+            background: rgba(31, 41, 55, 1);
+            color: #fff;
+            font-weight: 500;
+            border-radius: 9999px;
+            padding: 0.5rem 1rem;
+            font-size: 14px;
+            min-width: 150px;
+         }
+         .content a span {
+            white-space: nowrap;
+            min-width: none;
+         }
+         .content a svg {
+            flex: 0 0 20px;
+         }
+         .content a:hover {
+            background: rgba(31, 41, 55, 0.9);
+         }
+         @media (max-width: 768px) {
+            .content h1 {
+               font-size: 2.25rem;
+               line-height: 2.5rem;
+            }
+         }
+      </style>
+      <div class="wrapper">
+         <!-- Header -->
+         @@include('src/components/global/header/_header.htm', {})
+         <main
+            class="page">
+            <div class="page__container" sty>
+               <div class="hero">
+                  <div class="content content-anim">
+                     <h1> Design your website exactly the way you want</h1>
+                     <p>You can use TailwindCSS, or your own SCSS.</p>
+                     <a
+                        href="home.html"
+                        target="_blank">
+                        <span>Get home file</span>
+                        <svg
+                           xmlns="http://www.w3.org/2000/svg"
+                           viewBox="0 0 20 20"
+                           fill="currentColor"
+                           class="w-5 h-5">
+                           <path
+                              fillRule="evenodd"
+                              d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                              clipRule="evenodd" />
+                        </svg>
+                     </a>
+                  </div>
+               </div>
             </div>
-          </section>
-        </div>
+         </main>
+         <header data-get-height="header"></header>
+         <!-- Footer -->
+         @@include('src/components/global/footer/_footer.htm', {})
       </div>
-    </div>
-    <!-- Scripts js -->
-    @@include('src/components/global/_scripts.htm', {})
-  </body>
+      <!-- Scripts js -->
+      @@include('src/components/global/_scripts.htm', {})
+
+   </body>
 </html>

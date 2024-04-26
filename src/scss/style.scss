@@ -1,34 +1,21 @@
 @use "sass:math" as math;
-// ======================
-// Global Settings! =====
-$minWidth: 320;
-// The width of the canvas (layout)
-$maxWidth: 1920;
-// The width of the restrictive container
-$maxWidthContainer: 1290; // (0 = no restriction)
-// General indentation from a container
-$containerPadding: 30; // (30 = 15px left and right, 0 = no retreat)
-// Mixins
-@import "base/mixins";
-// Breikpoints
-$tablet: em(991.98); // tablets, some phones in horizontal position
-$mobile: em(767.98); // phones l
-$mobileSmall: em(479.98); // phones with
-
-// RESET ================
-// @import "base/null";
-// IS TAILWIND===========
-@import "tailwind";
-// ======================
-// Global ===============
+// ===================================
+// ? IS TAILWIND =====================
+// @import "params/tailwind";
+// ? IS CUSTOM =======================
+@import "params/custom";
+// ? =================================
+// ===================================
+// Global ============================
 @import "base/global";
-// FONTS ================
+// FONTS =============================
 @import "fonts/fonts";
-// @import "fonts/icons";
-// COMMON ===============
+// ICONS FONT ============
+@import "fonts/icons";
+// COMMON ============================
 @import "common";
 
 // ? Pages ========================================================================================================================================================
-@import "pages/home";
+// @import "pages/home";
 
 // ? Styles ========================================================================================================================================================

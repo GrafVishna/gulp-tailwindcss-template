@@ -1,4 +1,5 @@
-import { src, dest } from 'gulp'
+import pkg from 'gulp'
+const { src, dest } = pkg
 import webphtml from 'gulp-webp-html-nosvg'
 import fileinclude from 'gulp-file-include'
 import { config, gulpPaths } from "../../config.js"
@@ -17,7 +18,7 @@ export function devHTML() {
    * Includes partials (header, footer, etc.)
    * Writes the resulting HTML file to the dist directory
    * */
-   return src([`${gulpPaths.src.base}`, `${gulpPaths.src.components}**/*.htm`])
+   return src([`${gulpPaths.src.base}*.html`, `${gulpPaths.src.components}**/*.htm`])
       .pipe(fileinclude({ ...config.include }))
       .pipe(replaceAliasHTML())
       .pipe(dest(gulpPaths.dist.base))
@@ -37,11 +38,11 @@ export function prodHTML() {
     * Converts the images to webp and injects them into the HTML
     * Writes the resulting HTML to the dist directory
     */
-   return src(`${gulpPaths.src.base}`)
+   return src(`${gulpPaths.src.base}*.html`)
       .pipe(fileinclude({ ...config.include }))
       .pipe(replaceAliasHTML())
       .pipe(webphtml())
-      .pipe(dest(gulpPaths.dist.base))
+      .pipe(dest(gulpPaths.build.base))
 }
 //========================================================================================================================================================
 
@@ -59,9 +60,9 @@ export function prodHTMLNoWebp() {
    * Includes partials (header, footer, etc.)
    * Writes the resulting HTML file to the dist directory without webp images
    */
-   return src(gulpPaths.src.base)
-      .pipe(includePartials())  // include partials
+   return src(`${gulpPaths.src.base}*.html`)
       .pipe(fileinclude({ ...config.include }))
-      .pipe(dest(gulpPaths.dist.base))  // write resulting HTML to dist
+      .pipe(replaceAliasHTML())
+      .pipe(dest(gulpPaths.build.base))  // write resulting HTML to dist
 }
 //========================================================================================================================================================
