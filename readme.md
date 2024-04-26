@@ -1,5 +1,7 @@
 # Gulp with TailwindCSS Starter Template
 
+![The starting page of the template](/img.jpg)
+
 Gulp with TailwindCSS v3 Starter Kit ( ~~Updated with [TailwindCSS JIT](https://github.com/tailwindlabs/tailwindcss-jit)~~ - **latest tailwind has JIT is built-in** ) - A repo that makes your development easier with predefined gulp tasks that help you to use [tailwindcss](https://github.com/tailwindcss/tailwindcss) with simple commands.
 
 ## Features
