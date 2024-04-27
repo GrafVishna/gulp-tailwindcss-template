@@ -40,9 +40,7 @@ function watchFiles() {
   watch(`${gulpPaths.src.js}**/*.js`, series(devScripts, previewReload))
   watch(`${gulpPaths.src.images}`, series(devImages, previewReload))
   watch(`${gulpPaths.src.fonts}**/*`, series(devFonts, previewReload))
-  watch(gulpPaths.src.thirdParty, series(devThirdParty, previewReload)
-  )
-
+  watch(gulpPaths.src.thirdParty, series(devThirdParty, previewReload))
 }
 
 

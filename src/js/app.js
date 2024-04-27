@@ -63,8 +63,6 @@ import "./libs/gsap.js"
 
 // import "./libs/watcher.js"
 
-// Custom scripts ================================
-
 // ===============================================
 /* Go To Block */
 // Documentation inside the module file scroll.js
