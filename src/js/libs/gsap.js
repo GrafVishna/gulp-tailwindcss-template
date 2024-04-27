@@ -1,4 +1,4 @@
-import { templateLogger } from "../functions/helpers.js"
+import * as TF from "../functions/functions.js"
 
 import gsap from "gsap"
 // Import modules
@@ -19,11 +19,11 @@ gsap.registerPlugin(
 const animEl = document.querySelector('.content-anim')
 if (animEl) {
    gsap.fromTo(
-      '.content-anim',
+      animEl,
       { y: 10, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, delay: 0.5, ease: "power2.inOut" }
    )
 } else {
-   templateLogger('No animation element found', 'warning')
+   TF.logger('No animation element found', 'warning')
 }
 

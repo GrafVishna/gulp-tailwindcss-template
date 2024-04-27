@@ -1,6 +1,4 @@
-
-// Connecting a list of active modules
-import { uniqArray, templateLogger } from '../functions/functions.js'
+import * as TF from "../functions/functions.js"
 
 // DOCS ============================================================================================
 // Object Observer
@@ -135,7 +133,7 @@ class ScrollWatcher {
 	}
 	// The function of output to the console
 	scrollWatcherLogging(message, type) {
-		templateLogger(`[Watcher]: ${message}`, type)
+		TF.logger(`[Watcher]: ${message}`, type)
 	}
 	// Observation processing function
 	scrollWatcherCallback(entry, observer) {

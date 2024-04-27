@@ -1,9 +1,10 @@
+import * as TF from "./functions.js"
+
 /**
- * Gets height of elements with [data-get-height] attribute and
- * adds them to the :root element with --{element-id}-height format.
- * Example:
- * <header data-get-height="header"></header>
- * The result is in <head>:
+ * Get height of elements with [data-get-height] attribute
+ * and add them to the :root element with --{element-id}-height format.
+ * @example <header data-get-height="header"></header>
+ * Result in <head>:
  * <style id="watcher_height">
  *   :root {
  *     --input-height: 42px;;
@@ -12,21 +13,17 @@
  */
 function getElemHeight() {
    const getHeightEls = document.querySelectorAll('[data-get-height]')
-
-   // If there are elements to process
    if (getHeightEls.length > 0) {
       const styles = []
-
-      // Loop over them and get their heights and IDs
       getHeightEls.forEach(getHeightEl => {
          const elID = getHeightEl.getAttribute('data-get-height')
          const elHeight = getHeightEl.offsetHeight
 
-         // Create a CSS variable with the element's height
          styles.push(`--${elID}-height: ${elHeight}px;`)
+         TF.logger(`Set variable: --${elID}-height: ${elHeight}px;`, 'success')
       })
 
-      // Create a stylesheet with the generated CSS variables
+      // Create <style> element with styles in <head>
       createStylesToHead(styles, 'watcher_height')
    }
 }

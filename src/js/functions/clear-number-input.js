@@ -1,4 +1,4 @@
-import { templateLogger } from './helpers.js'
+import * as TF from "./functions.js"
 /**
  * Clears the input field from all characters except numbers
  * @param {string} selector - CSS selector for the input field
@@ -24,7 +24,7 @@ function validateNumber(selector) {
          })
       })
    } else {
-      templateLogger('No input fields found', 'warning')
+      TF.logger('No input fields found', 'warning')
    }
 }
 // To the desired Inuits Add attribute - data-clear-number

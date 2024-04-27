@@ -1,7 +1,7 @@
-import { projectLogger } from '../src/js/app.js'
+import { mainParams } from '../config.js'
 export const templateLogger = (message, logSymbol) => {
    const iconType = logSymbols[logSymbol]
-   if (projectLogger) {
+   if (mainParams.IS_LOG) {
       console.log(`\n\t${iconType} ${message}\n`)
    }
 }

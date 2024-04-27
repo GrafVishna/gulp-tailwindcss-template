@@ -1,4 +1,5 @@
 export const mainParams = {
+  IS_LOG: true,
   IS_TAILWIND: true,
   WEBP_COMPRESS: 80,
   JPEG_COMPRESS: 80,

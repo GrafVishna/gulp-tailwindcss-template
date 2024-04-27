@@ -5,7 +5,7 @@
   "type": "module",
   "name": "gulp-with-tailwindcss",
   "version": "2.2.0",
-  "description": "TailwindCSS StarterKit with Gulp 4",
+  "description": "TailwindCSS StarterKit with Gulp 5",
   "main": "gulpfile.js",
   "dependencies": {
     "gulp-ttf2woff": "^1.1.1"
@@ -26,7 +26,7 @@
     "esm": "^3.2.25",
     "flowbite": "^2.2.1",
     "gsap": "^3.12.5",
-    "gulp": "^4.0.2",
+    "gulp": "^5.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-concat": "^2.6.1",
     "gulp-file-include": "^2.3.0",
@@ -45,6 +45,7 @@
     "gulp-ttf2woff2": "^4.0.1",
     "gulp-webp": "^5.0.0",
     "gulp-webp-html-nosvg": "^1.1.1",
+    "js-cookie": "^3.0.5",
     "lightgallery": "^2.7.2",
     "log-symbols": "^4.1.0",
     "postcss": "^8.4.21",
@@ -71,7 +72,7 @@
   },
   "keywords": [
     "gulp",
-    "gulp4",
+    "gulp5",
     "tailwind",
     "tailwindcss",
     "sass"

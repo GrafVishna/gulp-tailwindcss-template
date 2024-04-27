@@ -57,6 +57,7 @@ All configurations are found in `config.js` file in the root directory. You can 
 
 ```js
 export const mainParams = {
+  IS_LOG: true,
   IS_TAILWIND: true,
   WEBP_COMPRESS: 80,
   JPEG_COMPRESS: 80,

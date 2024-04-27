@@ -1,58 +1,170 @@
 // ConsoleLog Log
-import { projectLogger } from '../app.js'
-import logSymbols from "log-symbols"
-export const templateLogger = (message, type) => {
-   let iconType = ''
-   if (type === 'success') iconType = logSymbols.success
-   else if (type === 'info') iconType = logSymbols.info
-   else if (type === 'warning') iconType = logSymbols.warning
-   else if (type === 'error') iconType = logSymbols.error
+import { mainParams } from '../../../config.js'
+// ==========================================================
 
-   if (projectLogger) {
-      console.log(`\n\t${iconType} ${message}`)
+/**
+ * Console logger with a symbol
+ * @param {string} message - Message to log
+ * @param {string} logSymbol - Symbol of type (success, info, warning, error, clock, question, alarm, star)
+ */
+export const logger = (message, logSymbol) => {
+   /**
+    * Icon of log message
+    * @type {string} 
+    */
+   const iconType = logSymbols[logSymbol]
+
+   /**
+    * Check if logging is enabled
+    * @type {boolean}
+    */
+   if (mainParams.IS_LOG) {
+      /**
+       * Log message in console
+       * @type {string}
+       */
+      console.log(`\n\t${iconType} ${message}\n`)
    }
 }
 
+const logSymbols = {
+   success: '✅',
+   info: '🚩',
+   warning: '❗',
+   error: '❌',
+   clock: '⌛',
+   question: '👀',
+   alarm: '🚨',
+   star: '🌟'
+}
 
-// The uniqueization of the array
+/**
+ * Get random integer between min and max
+ * @param {number} min - minimal value of the range
+ * @param {number} max - maximal value of the range
+ * @returns {number} random number between min and max
+ */
+export function getRandomNumber(min, max) {
+   /**
+    * Minimal value of the range
+    * @type {number}
+    */
+   const minValue = min
+   /**
+    * Maximal value of the range
+    * @type {number}
+    */
+   const maxValue = max
+   /**
+    * Final value of the random number
+    * @type {number}
+    */
+   const finalValue = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
+   return finalValue
+}
+
+/**
+ * Removes duplicates from an array
+ * @param {Array} array - Array of items
+ * @returns {Array} Array without duplicates
+ */
 export const uniqArray = (array) => {
+   /**
+    * Filters out duplicates from an array
+    * @param {*} item - Current item
+    * @param {number} index - Index of current item
+    * @param {Array} self - The array itself
+    * @returns {boolean} True if item is unique and should be kept
+    */
    return array.filter(function (item, index, self) {
-      return self.indexOf(item) === index
+      /**
+       * Item's index of occurrence in the array
+       * @type {number}
+       */
+      const itemIndex = self.indexOf(item)
+      /**
+       * Item is unique if its index of occurrence is equal to its index in the array
+       * @type {boolean}
+       */
+      const isUnique = itemIndex === index
+      return isUnique
    })
 }
 
-// Hesh's receipt at the site address
+/**
+ * Gets a hash (#) from the URL
+ * @return {string} - The hash without the leading "#"
+ */
 export function getHash() {
+   // Gets a hash (#) from the URL
+   // @return {string} - The hash without the leading "#"
    if (location.hash) { return location.hash.replace('#', '') }
 }
 
-// Hesh's instruction to the site address
+/**
+ * Sets the hash (#) of the URL
+ * @param {string} hash - The hash to set. If not provided, the URL will be
+ * reset to its full path without a hash.
+ */
 export function setHash(hash) {
+   // Sets the hash (#) of the URL
+   // @param {string} hash - The hash to set. If not provided, the URL will be
+   // reset to its full path without a hash.
    hash = hash ? `#${hash}` : window.location.href.split('#')[0]
+   // Updates the URL without reloading the page or triggering a pop state event
    history.pushState('', '', hash)
 }
 
-// Formatting figures of type 100,000,000,000
+/**
+ * Formatting figures of type 100,000,000,000
+ * Returns a number with thousands separators.
+ * @param {number|string} item - The number to format
+ * @param {string} [sepp=' '] - A separator for groups of thousands
+ * @returns {string} - Formatted number
+ */
 export function getDigFormat(item, sepp = ' ') {
+   /* Formats a number with thousands separators.
+    * @param {number|string} item - The number to format
+    * @param {string} [sepp=' '] - A separator for groups of thousands
+    * @returns {string} - Formatted number
+    */
    return item.toString().replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, `$1${sepp}`)
 }
 
-// To remove the class from all the elements of the arrayents of the array
+/**
+ * Remove class from all elements in array
+ * @param {array} array - Array of elements
+ * @param {string} className - Class to remove
+ */
 export function removeClasses(array, className) {
-   for (var i = 0; i < array.length; i++) {
+   // Remove class from all elements in array
+   // @param {array} array - Array of elements
+   // @param {string} className - Class to remove
+   for (let i = 0; i < array.length; i++) {
+      // Removes the class from a single element
       array[i].classList.remove(className)
    }
 }
 
 export const wwww = () => console.log('test wwww')
 
-// Menu open
+/**
+ * Opens the menu.
+ * Adds the class 'menu-open' to the HTML element.
+ */
 export function menuOpen() {
+   // Adds the class 'menu-open' to the HTML element.
+   // This will show the menu.
    document.documentElement.classList.add("menu-open")
 }
 
-// Menu close
+/**
+ * Closes the menu.
+ * Removes the class 'menu-open' from the HTML element.
+ */
 export function menuClose() {
+   // Removes the class 'menu-open' from the HTML element.
+   // This will hide the menu.
    document.documentElement.classList.remove("menu-open")
 }
 
