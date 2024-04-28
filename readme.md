@@ -154,15 +154,16 @@ To create a component, you need to create a component directory.
 #### An example of components of square:
 
 ```sh
-|--|components/
-|------| header/
-|----------| _header.html
-|----------| header.scss
-|----------| header.json
-|------| footer/
-|----------| _footer.html
-|----------| footer.scss
-|----------| footer.json
+|--|src/
+|-----|components/
+|---------| header/
+|-------------| _header.html
+|-------------| header.scss
+|-------------| header.json
+|---------| footer/
+|-------------| _footer.html
+|-------------| footer.scss
+|-------------| footer.json
 ``` 
 
 The style files created in the component directory are automatically included and do not require manual importing.
