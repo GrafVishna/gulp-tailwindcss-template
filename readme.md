@@ -223,9 +223,9 @@ File content "_user-card.htm":
 File content "user-card.json":
 ```json
 [
-   { "name": "User name 1", "age": "20", "profession": 'Developer', "photo": '@img/users/user1.jpg' },
-   { "name": "User name 2", "age": "30", "profession": 'Engineer', "photo": '@img/users/user2.jpg' },
-   { "name": "User name 3", "age": "40", "profession": 'Designer', "photo": '@img/users/user3.jpg' }
+   { "name": "User name 1", "age": "20", "profession": 'Developer', "photo": "@img/users/user1.jpg" },
+   { "name": "User name 2", "age": "30", "profession": 'Engineer', "photo": "@img/users/user2.jpg" },
+   { "name": "User name 3", "age": "40", "profession": 'Designer', "photo": "@img/users/user3.jpg" }
 ]
 ```
 
