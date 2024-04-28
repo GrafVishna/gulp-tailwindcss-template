@@ -52,6 +52,30 @@ import "./libs/gsap.js"
 // import "./functions/cookie.js"
 
 // ===============================================
+/* A JavaScript Typing Animation Library */
+// Documentation https://github.com/mattboldt/typed.js/?tab=readme-ov-file
+
+// import "./libs/typed.js"
+
+// ===============================================
+/* Call functions when you scroll to an element on the page. */
+// Documentation http://imakewebthings.com/waypoints/api/waypoint/
+
+// import "./libs/waypoints.js"
+
+// ===============================================
+/* A touch slideOut navigation menu */
+// Documentation https://github.com/mango/slideout
+
+// import "./libs/menu-slide.js"
+
+// ===============================================
+/* Format your <input/> content when you are typing */
+// Documentation https://nosir.github.io/cleave.js/
+
+// import "./libs/cleave.js"
+
+// ===============================================
 /* Dynamic adaptive */
 // Documentation of the plugin: 
 
