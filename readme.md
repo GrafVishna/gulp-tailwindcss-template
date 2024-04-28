@@ -120,11 +120,11 @@ In the "js" directory, in the file "app.js," there are commented imports of inst
 In the file "functions.js," various helper functions are located, which are exported for use. To use a specific function, you need to export it to the *.js file where you want to use it:
 
 - Or at once all:
-```sh
+```js
 import * as TF from "../functions/functions.js"
 ```
 - Or only specific:
-```sh
+```js
 import { getRandomNumber, logger } from "../functions/functions.js"
 ```
 
@@ -132,7 +132,7 @@ import { getRandomNumber, logger } from "../functions/functions.js"
 
 
 In the main file "style.scss," there are imports of auxiliary files. Among them are imports:
-```sh
+```scss
 @import "params/tailwind";
 @import "params/custom";
 ``` 
@@ -174,7 +174,7 @@ In the JSON file, you can store content for the component as needed (there can b
 _The path to the component always begins with the root of the project "src/components/"_
 
 - Example of simple connection "_user-card.htm" with transmission of parameters as an object (parameters to use not required):
-```sh
+```html
 @@include('src/components/global/_user-card.htm', { 
       "name": 'User name', 
       "age": '30', 
@@ -186,7 +186,7 @@ _The path to the component always begins with the root of the project "src/compo
    })
 ```
 File content "_user-card.htm":
-```sh
+```html
 <div class="user-card">
    <img src="@@photo.url" alt="@@photo.title" class="user-card__photo">
    <h2 class="user-card__name">@@name</h2>
@@ -196,7 +196,7 @@ File content "_user-card.htm":
 ```
 
 - Example of connection "_user-card.htm" in the "For" cycle:
-```sh
+```html
 @@for (var i = 0; i < 5; i++) {
   @@include('src/components/global/_user-card.htm', { 
       "name": 'User name', 
@@ -208,7 +208,7 @@ File content "_user-card.htm":
 ```
 
 - Example of connection "_user-card.htm" in the cycle "Loop":
-```sh
+```html
 @@loop('src/components/global/_user-card.htm', [
     { "name": "User name 1", "age": "20", "profession": 'Developer', "photo": '@img/users/user1.jpg' },
     { "name": "User name 2", "age": "30", "profession": 'Engineer', "photo": '@img/users/user2.jpg' },
@@ -217,11 +217,11 @@ File content "_user-card.htm":
 ```
 
 - Example of Connection "user-card.html" with the .json file ":
-```sh
+```html
 @@loop("src/components/global/_user-card.htm", "user-card.json")
 ```
 File content "user-card.json":
-```sh
+```json
 [
    { "name": "User name 1", "age": "20", "profession": 'Developer', "photo": '@img/users/user1.jpg' },
    { "name": "User name 2", "age": "30", "profession": 'Engineer', "photo": '@img/users/user2.jpg' },
