@@ -1,4 +1,4 @@
-import { menuClose, templateLogger } from "../functions/functions.js"
+import { menuClose, logger } from "../functions/functions.js"
 
 // ===============================================
 // Connecting a complement to increase the capabilities
@@ -51,8 +51,8 @@ export let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 
 				behavior: "smooth"
 			})
 		}
-		templateLogger(`[gotoBlock]: We go to ${targetBlock}`)
+		logger(`'rocket', [gotoBlock]: We go to ${targetBlock}`)
 	} else {
-		templateLogger(`[gotoBlock]: There is no such block on the page ${targetBlock}`)
+		logger(`'alarm', [gotoBlock]: There is no such block on the page ${targetBlock}`)
 	}
 }

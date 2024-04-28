@@ -4,6 +4,8 @@ const { series, parallel, watch } = gulp
 
 import { gulpPaths, config } from "./config.js"
 import browserSync from "browser-sync"
+import connectPHP from "gulp-connect-php"
+
 import { devStyles, prodStyles } from "./config/tasks/styles.js"
 import { devClean, prodClean } from "./config/tasks/clean.js"
 import { devScripts, prodScripts } from "./config/tasks/scripts.js"
@@ -26,22 +28,44 @@ const logSymbols = {
 //Load Previews on Browser on dev
 function livePreview(done) {
   browserSync.init({
+    port: 4000,
+    proxy: 'localhost:8000',
     server: {
       baseDir: gulpPaths.dist.base,
+      directory: true
     },
-    port: config.port || 4000,
-  })
-  done()
+  }),
+    done()
+}
+function livePreviewPhp(done) {
+  connectPHP.server({
+    base: gulpPaths.dist.base,
+    port: 8000,
+    keepalive: true,
+    open: false
+  }),
+    browserSync.init({
+      port: 4000,
+      proxy: 'localhost:8000',
+    }),
+    done()
 }
 
 function watchFiles() {
+  // Observation of HTML files
   watch(`${gulpPaths.src.base}**/*.{htm,html}`, series(devHTML, devStyles, previewReload))
+  // SCSS File Observation and TailWind CSS configuration files (if specified in configuration)
   watch([config.tailwindjs && config.tailwindjs, `${gulpPaths.src.scss}**/*.scss`, `${gulpPaths.src.components}**/*.scss`], series(devStyles, previewReload))
+  // Observing JS files
   watch(`${gulpPaths.src.js}**/*.js`, series(devScripts, previewReload))
+  // Image observation
   watch(`${gulpPaths.src.images}`, series(devImages, previewReload))
+  // Observing fonts
   watch(`${gulpPaths.src.fonts}**/*`, series(devFonts, previewReload))
+  // Observing the files of third-party libraries
   watch(gulpPaths.src.thirdParty, series(devThirdParty, previewReload))
 }
+
 
 
 function previewReload(done) {
@@ -53,9 +77,16 @@ function previewReload(done) {
 export const dev = series(
   devClean,
   devFonts,
-  fontsStyle,
-  parallel(devStyles, devScripts, devImages, devThirdParty, devHTML),
+  parallel(fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
   livePreview,
+  watchFiles
+)
+
+export const devPhp = series(
+  devClean,
+  devFonts,
+  parallel(fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
+  livePreviewPhp,
   watchFiles
 )
 
@@ -63,17 +94,13 @@ export const dev = series(
 export const prod = series(
   prodClean,
   prodFonts,
-  fontsStyle,
-  imageOptimize,
-  parallel(prodStyles, prodScripts, prodHTMLNoWebp, prodThirdParty),
+  parallel(fontsStyle, imageOptimize, prodStyles, prodScripts, prodHTMLNoWebp, prodThirdParty),
   buildFinish
 )
 export const webp = series(
   prodClean,
   prodFonts,
-  fontsStyle,
-  imageOptimize,
-  parallel(prodStyles, imgWebp, prodScripts, prodHTML, prodThirdParty),
+  parallel(fontsStyle, imageOptimize, prodStyles, imgWebp, prodScripts, prodHTML, prodThirdParty),
   buildFinish
 )
 

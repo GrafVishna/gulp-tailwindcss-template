@@ -31,6 +31,12 @@ Start development server with live preview
 yarn dev // or // npm run dev
 ```
 
+Start development server and PHP server with live preview
+
+```sh
+yarn php // or // npm run php
+```
+
 Generate build files for production server
 
 ```sh
@@ -65,7 +71,7 @@ export const mainParams = {
 }
 
 // tailwind plugins
- // set to false to disable
+// set to false to disable
 const plugins = {
   typography: true,
   forms: true,

@@ -2,14 +2,14 @@ import * as TF from "../functions/functions.js"
 
 import gsap from "gsap"
 // Import modules
-import ScrollTrigger from "gsap/ScrollTrigger.js"
-// import Flip from "gsap/Flip";
-// import Draggable from "gsap/Draggable";
-// import MotionPathPlugin from "gsap/MotionPathPlugin";
+// import ScrollTrigger from "gsap/ScrollTrigger.js"
+// import Flip from "gsap/Flip.js";
+// import Draggable from "gsap/Draggable.js";
+// import MotionPathPlugin from "gsap/MotionPathPlugin.js";
 
 // Register modules
 gsap.registerPlugin(
-   ScrollTrigger,
+   // ScrollTrigger,
    // Draggable,
    // Flip,
    // MotionPathPlugin

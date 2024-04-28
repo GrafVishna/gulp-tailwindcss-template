@@ -1,6 +1,18 @@
 // ConsoleLog Log
 import { mainParams } from '../../../config.js'
 // ==========================================================
+const logSymbols = {
+   success: '✅',
+   info: '🚩',
+   rocket: '🚀',
+   warning: '❗',
+   error: '❌',
+   clock: '⌛',
+   question: '👀',
+   alarm: '🚨',
+   star: '🌟'
+}
+// ==========================================================
 
 /**
  * Console logger with a symbol
@@ -27,39 +39,30 @@ export const logger = (message, logSymbol) => {
    }
 }
 
-const logSymbols = {
-   success: '✅',
-   info: '🚩',
-   warning: '❗',
-   error: '❌',
-   clock: '⌛',
-   question: '👀',
-   alarm: '🚨',
-   star: '🌟'
-}
-
 /**
- * Get random integer between min and max
- * @param {number} min - minimal value of the range
- * @param {number} max - maximal value of the range
- * @returns {number} random number between min and max
+ * Generates random numbers between a min and max value
+ * @param {number} min - Minimum value of random number
+ * @param {number} max - Maximum value of random number
+ * @param {number} [count] - Count of random numbers to generate
+ * @returns {number|Array} Random number or array of random numbers
  */
-export function getRandomNumber(min, max) {
+export function getRandomNumber(min, max, count) {
    /**
-    * Minimal value of the range
-    * @type {number}
+    * Final value of random number(s)
+    * @type {number|Array}
     */
-   const minValue = min
+   let finalValue
+
    /**
-    * Maximal value of the range
-    * @type {number}
+    * If count is not defined, generate a single number,
+    * otherwise generate an array of numbers
     */
-   const maxValue = max
-   /**
-    * Final value of the random number
-    * @type {number}
-    */
-   const finalValue = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue
+   if (typeof count === 'undefined') {
+      finalValue = Math.floor(Math.random() * (max - min + 1)) + min
+   } else {
+      finalValue = Array.from({ length: count }, () => Math.floor(Math.random() * (max - min + 1)) + min)
+   }
+
    return finalValue
 }
 

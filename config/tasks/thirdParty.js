@@ -17,7 +17,7 @@ import { gulpPaths } from "../../config.js"
  */
 
 export const devThirdParty = (done) => {
-   thirdParty(gulpPaths.dist.files)
+   thirdParty(`${gulpPaths.dist.files}`)
    done()
 }
 

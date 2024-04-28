@@ -1,4 +1,5 @@
 import * as TF from "../functions/functions.js"
 
-
-console.log("TEST")
+// Example
+const rand = TF.getRandomNumber(3, 115, 10)
+console.log(rand)

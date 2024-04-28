@@ -5,7 +5,7 @@ import Swiper from 'swiper'
 
 // Base styles ====================================================================================
 
-import '../../scss/libs/swiper-base.scss'
+// import '../../scss/libs/swiper-base.scss'
 
 // Modules: =======================================================================================
 // Navigation, Pagination, Autoplay, EffectFade, Lazy, Manipulation
