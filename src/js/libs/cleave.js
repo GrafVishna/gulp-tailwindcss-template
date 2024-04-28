@@ -8,6 +8,7 @@ function createCleave(selector, params) {
 }
 
 createCleave('.input-element', {
-   blocks: [4, 3, 3, 4],
+   delimiter: '--',
+   blocks: [3, 3, 3],
    uppercase: true
 })

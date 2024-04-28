@@ -28,14 +28,12 @@ const logSymbols = {
 //Load Previews on Browser on dev
 function livePreview(done) {
   browserSync.init({
-    port: 4000,
-    proxy: 'localhost:8000',
     server: {
       baseDir: gulpPaths.dist.base,
-      directory: true
     },
-  }),
-    done()
+    port: config.port || 4000,
+  })
+  done()
 }
 function livePreviewPhp(done) {
   connectPHP.server({
@@ -45,7 +43,7 @@ function livePreviewPhp(done) {
     open: false
   }),
     browserSync.init({
-      port: 4000,
+      port: config.port || 4000,
       proxy: 'localhost:8000',
     }),
     done()
