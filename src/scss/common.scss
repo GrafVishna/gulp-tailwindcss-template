@@ -28,21 +28,3 @@ body {
 }
 
 //========================================================================================================================================================
-
-.form {
-   padding: toRem(100) 0;
-
-   input {
-      border: toRem(1) solid #000;
-      width: toRem(300);
-      height: toRem(35);
-      padding: toRem(5) toRem(20);
-   }
-
-   button {
-      border-radius: toRem(40);
-      padding: toRem(10) toRem(20);
-      background: red;
-      color: #fff;
-   }
-}

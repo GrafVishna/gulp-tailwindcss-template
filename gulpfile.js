@@ -65,8 +65,7 @@ function watchFiles() {
 }
 
 
-
-function previewReload(done) {
+const previewReload = (done) => {
   console.log("\n\t" + logSymbols.question, "Reloading Browser Preview.\n")
   browserSync.reload()
   done()
@@ -74,31 +73,28 @@ function previewReload(done) {
 
 export const dev = series(
   devClean,
-  devFonts,
-  parallel(fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
+  parallel(devFonts, fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
   livePreview,
   watchFiles
 )
 
 export const devPhp = series(
   devClean,
-  devFonts,
-  parallel(fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
+  parallel(devFonts, fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
   livePreviewPhp,
   watchFiles
 )
 
-
 export const prod = series(
   prodClean,
-  prodFonts,
-  parallel(fontsStyle, imageOptimize, prodStyles, prodScripts, prodHTMLNoWebp, prodThirdParty),
+  parallel(prodFonts, fontsStyle, imageOptimize, prodStyles, prodScripts, prodHTMLNoWebp, prodThirdParty),
   buildFinish
 )
+
 export const webp = series(
   prodClean,
-  prodFonts,
-  parallel(fontsStyle, imageOptimize, prodStyles, imgWebp, prodScripts, prodHTML, prodThirdParty),
+  imageOptimize,
+  parallel(prodFonts, fontsStyle, prodStyles, imgWebp, prodScripts, prodHTML, prodThirdParty),
   buildFinish
 )
 

@@ -28,7 +28,7 @@ export const prodThirdParty = (done) => {
 
 function thirdParty(processPath) {
    // Copy third-party libraries from source to dist
-   return src(gulpPaths.src.files)
+   return src(gulpPaths.src.files, { encoding: false })
       .pipe(newer(processPath))
       // Copy files to dist
       .pipe(dest(processPath))

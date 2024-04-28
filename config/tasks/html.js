@@ -18,7 +18,7 @@ export function devHTML() {
    * Includes partials (header, footer, etc.)
    * Writes the resulting HTML file to the dist directory
    * */
-   return src([`${gulpPaths.src.base}*.html`, `${gulpPaths.src.components}**/*.htm`])
+   return src([`${gulpPaths.src.base}*.html`])
       .pipe(fileinclude({ ...config.include }))
       .pipe(replaceAliasHTML())
       .pipe(dest(gulpPaths.dist.base))

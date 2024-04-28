@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
    <!-- Head -->
-   @@include('src/components/global/_head.htm', { "title": 'Home page' })
+   @@include('src/components/global/_head.html', { "title": 'Home page' })
    <body>
       <style>
          body {
@@ -71,7 +71,7 @@
       </style>
       <div class="wrapper">
          <!-- Header -->
-         @@include('src/components/global/header/_header.htm', {})
+         @@include('src/components/global/header/_header.html', {})
 
          <main
             data-menu-panel
@@ -102,10 +102,10 @@
          </main>
          <header data-get-height="header"></header>
          <!-- Footer -->
-         @@include('src/components/global/footer/_footer.htm', {})
+         @@include('src/components/global/footer/_footer.html', {})
       </div>
       <!-- Scripts js -->
-      @@include('src/components/global/_scripts.htm', {})
+      @@include('src/components/global/_scripts.html', {})
 
    </body>
 </html>

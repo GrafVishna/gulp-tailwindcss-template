@@ -72,9 +72,9 @@ export const gulpPaths = {
     js: `${srcFolder}/js/`,
     scss: `${srcFolder}/scss/`,
     components: `${srcFolder}/components/`,
-    images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp}`,
+    images: `${srcFolder}/img/**/*.{jpg,jpeg,png,gif,webp,svg,ico}`,
     fonts: `${srcFolder}/fonts/`,
     files: `${srcFolder}/files/**/*.*`,
-    thirdParty: `${srcFolder}/thirdParty/**/*.*`,
+    thirdParty: `${srcFolder}/files/**/*.*`,
   },
 }

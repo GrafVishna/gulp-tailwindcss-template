@@ -33,18 +33,18 @@ $body = '<h1>Data from form!</h1>';
 $body .= '<div>
             <h1>Name</h1>
             <p>' . $name . '</p>
-        </div>';
+        </div>';  
 
 $mail->Body = $body;
 
 // Send the email
-if (!$mail->send()) {
-    $message = 'Error';
+if (!$mail->send()) {  
+    $message = 'Error'; 
 } else {
     $message = 'The data is sent!';
 }
 
-$response = ['message' => $message];
+$response = ['message' => $message]; 
 
 header('Content-type: application/json');
 echo json_encode($response);
