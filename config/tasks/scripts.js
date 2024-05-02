@@ -1,8 +1,6 @@
 import pkg from 'gulp'
 const { src, dest } = pkg
 import webpack from 'webpack-stream'
-
-import { webpackProdMin } from '../webpack.config.prod.js'
 import { webpackDev } from '../webpack.config.dev.js'
 import { webpackProd } from '../webpack.config.prod.js'
 import { gulpPaths } from "../../config.js"
@@ -42,9 +40,3 @@ export function prodScripts() {
       .pipe(dest(`${gulpPaths.build.js}`)) // Save the resulting minified JS file to the destination directory
 }
 //========================================================================================================================================================
-
-
-
-// .pipe(webpack(webpackProd))
-// .pipe(dest(gulpPaths.build.js))
-// .pipe(src(`${gulpPaths.src.js}/**/*.js`))

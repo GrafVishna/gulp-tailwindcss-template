@@ -2,12 +2,14 @@ import alias from 'gulp-path-alias'
 
 
 const pathHTML = {
-   '@components': './components',
+   '@components': 'src/components',
    '@img': './img',
+   '@files': './files',
 }
 const pathSCSS = {
-   '@components': '../components',
+   '@components': 'src/components',
    '@img': '../img',
+   '@files': './files',
 }
 
 export function replaceAliasHTML() {

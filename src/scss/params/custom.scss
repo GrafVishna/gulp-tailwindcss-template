@@ -24,6 +24,7 @@ $mobileSmall: em(479.98); // phones with
 // ====================================================================
 // ====================================================================
 
+$containerWidth: $maxWidthContainer + $containerPadding;
 [class*="__container"] {
    @if ($maxWidthContainer>0) {
       max-width: toRem($containerWidth);

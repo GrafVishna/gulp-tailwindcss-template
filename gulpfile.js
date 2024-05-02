@@ -2,10 +2,10 @@
 import gulp from 'gulp'
 const { series, parallel, watch } = gulp
 
-import { gulpPaths, config } from "./config.js"
+import { gulpPaths, config, logSymbols } from "./config.js"
 import browserSync from "browser-sync"
 import connectPHP from "gulp-connect-php"
-
+// import Qrcode from "bs-console-qrcode"
 import { devStyles, prodStyles } from "./config/tasks/styles.js"
 import { devClean, prodClean } from "./config/tasks/clean.js"
 import { devScripts, prodScripts } from "./config/tasks/scripts.js"
@@ -13,17 +13,6 @@ import { devImages, imageOptimize, imgWebp } from "./config/tasks/images.js"
 import { devFonts, prodFonts, fontsStyle } from "./config/tasks/fonts.js"
 import { devThirdParty, prodThirdParty } from "./config/tasks/thirdParty.js"
 import { devHTML, prodHTML, prodHTMLNoWebp } from "./config/tasks/html.js"
-const logSymbols = {
-  success: '✅',
-  info: '🚩',
-  warning: '❗',
-  error: '❌',
-  clock: '⌛',
-  question: '👀',
-  alarm: '🚨',
-  star: '🌟'
-}
-
 
 //Load Previews on Browser on dev
 function livePreview(done) {
@@ -32,6 +21,7 @@ function livePreview(done) {
       baseDir: gulpPaths.dist.base,
     },
     port: config.port || 4000,
+    // plugins: [Qrcode]
   })
   done()
 }
@@ -51,9 +41,9 @@ function livePreviewPhp(done) {
 
 function watchFiles() {
   // Observation of HTML files
-  watch(`${gulpPaths.src.base}**/*.{htm,html}`, series(devHTML, devStyles, previewReload))
+  watch(`${gulpPaths.src.base}**/*.{htm,html}`, series(devHTML, previewReload))
   // SCSS File Observation and TailWind CSS configuration files (if specified in configuration)
-  watch([config.tailwindjs && config.tailwindjs, `${gulpPaths.src.scss}**/*.scss`, `${gulpPaths.src.components}**/*.scss`], series(devStyles, previewReload))
+  watch([config.tailwindjs && config.tailwindjs, `${gulpPaths.src.base}**/*.scss`], series(devStyles, previewHotReload))
   // Observing JS files
   watch(`${gulpPaths.src.js}**/*.js`, series(devScripts, previewReload))
   // Image observation
@@ -68,6 +58,11 @@ function watchFiles() {
 const previewReload = (done) => {
   console.log("\n\t" + logSymbols.question, "Reloading Browser Preview.\n")
   browserSync.reload()
+  done()
+}
+
+const previewHotReload = (done) => {
+  console.log("\n\t" + logSymbols.question, "Hot Reloading Browser Preview.\n")
   done()
 }
 

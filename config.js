@@ -78,3 +78,14 @@ export const gulpPaths = {
     thirdParty: `${srcFolder}/files/**/*.*`,
   },
 }
+
+export const logSymbols = {
+  success: '✅',
+  info: '🚩',
+  warning: '❗',
+  error: '❌',
+  clock: '⌛',
+  question: '👀',
+  alarm: '🚨',
+  star: '🌟'
+}

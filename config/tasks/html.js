@@ -3,7 +3,7 @@ const { src, dest } = pkg
 import webphtml from 'gulp-webp-html-nosvg'
 import fileinclude from 'gulp-file-include'
 import { config, gulpPaths } from "../../config.js"
-import { replaceAliasHTML } from "./replaceHtml.js"
+import { replaceAliasHTML } from "./replacePaths.js"
 
 //========================================================================================================================================================
 

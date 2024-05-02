@@ -1,6 +1,5 @@
 import * as path from 'path'
 import { gulpPaths } from "../config.js"
-import TerserPlugin from 'terser-webpack-plugin'
 // =========================================================================================================================
 // todo Config JS
 const configJs = {

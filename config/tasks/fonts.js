@@ -111,7 +111,8 @@ export const fontsStyle = () => {
             // Check if this is a new font, to avoid duplicate font faces
             if (newFileOnly !== fontFileName) {
                // Get font name from file name
-               let fontName = fontFileName.replace(/[^a-zA-Z0-9]+/g, '')
+               // let fontName = fontFileName.replace(/[^a-zA-Z0-9]+/g, '')
+               let fontName = fontFileName.split("-")[0]
                // Get font weight from file name
                let fontWeight = fontFileName.split("-")[1]
                   ? fontFileName.split("-")[1]

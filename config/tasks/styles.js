@@ -1,30 +1,38 @@
 import gulp from 'gulp'
 const { src, dest } = gulp
+import browserSync from "browser-sync"
 import tailwindcss from "tailwindcss"
 import autoprefixer from "autoprefixer"
 import dartSass from 'sass'
 import gulpSass from 'gulp-sass'
 const sass = gulpSass(dartSass)
+import sassGlob from 'gulp-sass-glob'
 import postcss from "gulp-postcss"
 import concat from "gulp-concat"
 import cssnano from "cssnano"
 import purgecss from "gulp-purgecss"
 import { gulpPaths, config, mainParams } from "../../config.js"
-import { replaceAliasSCSS } from "./replaceHtml.js"
+import { replaceAliasSCSS } from "./replacePaths.js"
 
+import sourcemaps from 'gulp-sourcemaps'
 
 export function devStyles() {
-
-   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
+   return src([`${gulpPaths.src.scss}style.scss`])
+      .pipe(sourcemaps.init())
+      .pipe(sassGlob())
       .pipe(sass().on("error", sass.logError))
       .pipe(postcss([tailwindcss(config.tailwindjs), autoprefixer()]))
       .pipe(concat({ path: "style.css" }))
       .pipe(replaceAliasSCSS())
+      .pipe(sourcemaps.write('.'))
+      .pipe(browserSync.stream())
       .pipe(dest(gulpPaths.dist.css))
 }
 
 export function prodStyles() {
-   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
+   return src([`${gulpPaths.src.scss}style.scss`])
+      .pipe(sourcemaps.init())
+      .pipe(sassGlob())
       .pipe(sass().on("error", sass.logError))
       .pipe(
          postcss([
@@ -47,5 +55,7 @@ export function prodStyles() {
       )
       .pipe(replaceAliasSCSS())
       .pipe(concat({ path: "style.css" }))
+      .pipe(sourcemaps.write('.'))
       .pipe(dest(gulpPaths.build.css))
 }
+
