@@ -21,6 +21,12 @@
 
 import "./libs/gsap.js"
 
+// ? ===============================================
+/* Modals Popups */
+// Documentation: https://micromodal.vercel.app/
+
+// import "./libs/modal.js"
+
 // ===============================================
 /* Cleaning the "only numbers" input */
 // Documentation inside the module file:

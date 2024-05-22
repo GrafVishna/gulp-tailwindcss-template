@@ -9,6 +9,7 @@
   "main": "gulpfile.js",
   "dependencies": {
     "gulp-ttf2woff": "^1.1.1",
+    "micromodal": "^0.4.10",
     "slideout": "^1.0.1",
     "typed.js": "^2.1.0"
   },
