@@ -17,7 +17,7 @@ import { replaceAliasSCSS } from "./replacePaths.js"
 import sourcemaps from 'gulp-sourcemaps'
 
 export function devStyles() {
-   return src([`${gulpPaths.src.scss}style.scss`])
+   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
       .pipe(sass().on("error", sass.logError))
@@ -30,7 +30,7 @@ export function devStyles() {
 }
 
 export function prodStyles() {
-   return src([`${gulpPaths.src.scss}style.scss`])
+   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
       .pipe(sass().on("error", sass.logError))
