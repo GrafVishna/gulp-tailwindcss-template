@@ -1,11 +1,24 @@
 import pkg from 'gulp'
 const { src, dest } = pkg
+import versionNumber from "gulp-version-number"
 import webphtml from 'gulp-webp-html-nosvg'
 import fileinclude from 'gulp-file-include'
 import { config, gulpPaths } from "../../config.js"
 import { replaceAliasHTML } from "./replacePaths.js"
 
 //========================================================================================================================================================
+
+const versions = {
+   'value': '%DT%',
+   'append': {
+      'key': 'v',
+      'cover': 0,
+      'to': ['css', 'js', 'img']
+   },
+   'output': {
+      'file': '../version.json'
+   }
+}
 
 /**
  * Produces the HTML file in dev mode.
@@ -21,6 +34,7 @@ export function devHTML() {
    return src([`${gulpPaths.src.base}*.html`])
       .pipe(fileinclude({ ...config.include }))
       .pipe(replaceAliasHTML())
+      .pipe(versionNumber({ ...versions }))
       .pipe(dest(gulpPaths.dist.base))
 }
 
@@ -42,6 +56,7 @@ export function prodHTML() {
       .pipe(fileinclude({ ...config.include }))
       .pipe(replaceAliasHTML())
       .pipe(webphtml())
+      .pipe(versionNumber({ ...versions }))
       .pipe(dest(gulpPaths.build.base))
 }
 //========================================================================================================================================================

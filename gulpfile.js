@@ -5,7 +5,6 @@ const { series, parallel, watch } = gulp
 import { gulpPaths, config, logSymbols } from "./config.js"
 import browserSync from "browser-sync"
 import connectPHP from "gulp-connect-php"
-// import Qrcode from "bs-console-qrcode"
 import { devStyles, prodStyles } from "./config/tasks/styles.js"
 import { devClean, prodClean } from "./config/tasks/clean.js"
 import { devScripts, prodScripts } from "./config/tasks/scripts.js"
@@ -19,9 +18,16 @@ function livePreview(done) {
   browserSync.init({
     server: {
       baseDir: gulpPaths.dist.base,
+      middleware: [
+        function (req, res, next) {
+          res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate")
+          res.setHeader("Pragma", "no-cache")
+          res.setHeader("Expires", "0")
+          next()
+        }
+      ]
     },
     port: config.port || 4000,
-    // plugins: [Qrcode]
   })
   done()
 }
