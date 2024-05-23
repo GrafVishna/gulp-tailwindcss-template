@@ -2,7 +2,7 @@
 import gulp from 'gulp'
 const { series, parallel, watch } = gulp
 
-import { gulpPaths, config, logSymbols } from "./config.js"
+import { gulpPaths, config, mainParams, logSymbols } from "./config.js"
 import browserSync from "browser-sync"
 import connectPHP from "gulp-connect-php"
 import { devStyles, prodStyles } from "./config/tasks/styles.js"
@@ -47,7 +47,7 @@ function livePreviewPhp(done) {
 
 function watchFiles() {
   // Observation of HTML files
-  watch(`${gulpPaths.src.base}**/*.{htm,html}`, series(devHTML, previewReload))
+  watch(`${gulpPaths.src.base}**/*.{htm,html,json}`, series(devHTML, mainParams.IS_TAILWIND && devStyles, previewReload))
   // SCSS File Observation and TailWind CSS configuration files (if specified in configuration)
   watch([config.tailwindjs && config.tailwindjs, `${gulpPaths.src.base}**/*.scss`], series(devStyles, previewHotReload))
   // Observing JS files

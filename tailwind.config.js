@@ -1,22 +1,27 @@
-import { config, mainParams } from "./config" //options from config.js
+import { config, mainParams } from "./config.js" //options from config.js
+import typography from "@tailwindcss/typography"
+import forms from "@tailwindcss/forms"
+import containerQueries from "@tailwindcss/container-queries"
 
 if (mainParams.IS_TAILWIND) {
   const allPlugins = {
-    // typography: require("@tailwindcss/typography"),
-    // forms: require("@tailwindcss/forms"),
-    // containerQueries: require("@tailwindcss/container-queries"),
+    typography,
+    forms,
+    containerQueries,
   }
 
-  const plugins = Object.keys(allPlugins)
-    .filter((key) => config.plugins[key])
-    .map((key) => { if (key in config.plugins && config.plugins[key]) { return allPlugins[key] } })
+  const plugins = Object.values(allPlugins).filter((plugin) => {
+    return plugin && config.plugins && config.plugins[plugin.name]
+  })
 
   /** @type {import('tailwindcss').Config} */
   module.exports = {
     content: ["./src/**/*.{html,htm,scss,js,php}"],
     darkMode: "class",
     theme: {
-      extend: {},
+      extend: {
+
+      },
     },
     plugins: plugins,
   }
