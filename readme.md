@@ -225,7 +225,7 @@ File content "_user-card.htm":
 
 - Example of Connection "user-card.html" with the .json file ":
 ```html
-@@loop("src/components/global/_user-card.htm", "user-card.json")
+@@loop("src/components/global/user-card/_user-card.htm", "components/global/user-card/user-card.json")
 ```
 File content "user-card.json":
 ```json
