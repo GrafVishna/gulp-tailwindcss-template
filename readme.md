@@ -44,9 +44,13 @@ yarn dev // or // npm run dev (No Webp)
 ```
 
 Build a project without converting images (optimization only)
-
+yarn (No Webp)
 ```sh
-yarn build // or // npm run build (No Webp)
+yarn build
+```
+npm (No Webp)
+```sh
+npm run build
 ```
 
 Build a project with image conversion and optimization
