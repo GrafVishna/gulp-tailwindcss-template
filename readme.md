@@ -44,9 +44,13 @@ yarn dev // or // npm run dev (No Webp)
 ```
 
 Build a project without converting images (optimization only)
-
+yarn (No Webp)
 ```sh
-yarn build // or // npm run build (No Webp)
+yarn build
+```
+npm (No Webp)
+```sh
+npm run build
 ```
 
 Build a project with image conversion and optimization
@@ -225,7 +229,7 @@ File content "_user-card.htm":
 
 - Example of Connection "user-card.html" with the .json file ":
 ```html
-@@loop("src/components/global/_user-card.htm", "user-card.json")
+@@loop("src/components/global/user-card/_user-card.htm", "components/global/user-card/user-card.json")
 ```
 File content "user-card.json":
 ```json
