@@ -8,7 +8,7 @@ $maxWidthContainer: 1290; // (0 = no restriction)
 // General indentation from a container
 $containerPadding: 30; // (30 = 15px left and right, 0 = no retreat)
 // Mixins
-@import "base/mixins";
+@import "../base/mixins";
 // Fonts
 $fontFamily: "Inter", sans-serif;
 $fontSize: toRem(14);

@@ -5,11 +5,12 @@ const pathHTML = {
    '@components': 'src/components',
    '@img': './img',
    '@files': './files',
+   '@js': './js',
 }
 const pathSCSS = {
    '@components': 'src/components',
    '@img': '../img',
-   '@files': './files',
+   '@files': '../files',
 }
 
 export function replaceAliasHTML() {

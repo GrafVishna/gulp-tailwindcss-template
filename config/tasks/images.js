@@ -12,7 +12,7 @@ import { config, gulpPaths } from "../../config.js"
  * Copies new images from src to dist.
  * @returns {Object} - gulp stream
  */
-export function devImages() {
+const devImages = () => {
    // Grab new images from the source folder
    // and copy them to the dist folder
    return src(gulpPaths.src.images, { encoding: false })
@@ -30,7 +30,7 @@ export function devImages() {
  * This task optimizes images using gulp-imagemin. The options used are
  * defined in the config file.
  */
-export const imageOptimize = () => {
+const imageOptimize = () => {
    // Optimize images
    return src(gulpPaths.src.images, { encoding: false })
       .pipe(gulpPlumber(
@@ -53,7 +53,7 @@ export const imageOptimize = () => {
  * used are defined in the config file. The optimized images are copied to the
  * dist folder.
  */
-export const imgWebp = () => {
+const imgWebp = () => {
    // Optimize images
    // imageOptimize()
    // Generate WebP versions of images
@@ -70,3 +70,8 @@ export const imgWebp = () => {
 }
 //========================================================================================================================================================
 
+export const images = {
+   dev: devImages,
+   prod: imageOptimize,
+   prodWebp: imgWebp
+}

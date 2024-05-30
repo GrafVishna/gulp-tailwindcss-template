@@ -1,17 +1,13 @@
 
 import gulp from 'gulp'
 const { series, parallel, watch } = gulp
-
 import { gulpPaths, config, mainParams, logSymbols } from "./config.js"
 import browserSync from "browser-sync"
 import connectPHP from "gulp-connect-php"
-import { devStyles, prodStyles } from "./config/tasks/styles.js"
-import { devClean, prodClean } from "./config/tasks/clean.js"
-import { devScripts, prodScripts } from "./config/tasks/scripts.js"
-import { devImages, imageOptimize, imgWebp } from "./config/tasks/images.js"
-import { devFonts, prodFonts, fontsStyle } from "./config/tasks/fonts.js"
-import { devThirdParty, prodThirdParty } from "./config/tasks/thirdParty.js"
-import { devHTML, prodHTML, prodHTMLNoWebp } from "./config/tasks/html.js"
+import { tasksArr } from "./config/tasks.js"
+
+const { styles, cleans, scripts, images, fonts, html, files } = tasksArr
+
 
 //Load Previews on Browser on dev
 function livePreview(done) {
@@ -46,18 +42,12 @@ function livePreviewPhp(done) {
 }
 
 function watchFiles() {
-  // Observation of HTML files
-  watch(`${gulpPaths.src.base}**/*.{htm,html,json}`, series(devHTML, mainParams.IS_TAILWIND && devStyles, previewReload))
-  // SCSS File Observation and TailWind CSS configuration files (if specified in configuration)
-  watch([config.tailwindjs && config.tailwindjs, `${gulpPaths.src.base}**/*.scss`], series(devStyles, previewHotReload))
-  // Observing JS files
-  watch(`${gulpPaths.src.js}**/*.js`, series(devScripts, previewReload))
-  // Image observation
-  watch(`${gulpPaths.src.images}`, series(devImages, previewReload))
-  // Observing fonts
-  watch(`${gulpPaths.src.fonts}**/*`, series(devFonts, previewReload))
-  // Observing the files of third-party libraries
-  watch(gulpPaths.src.thirdParty, series(devThirdParty, previewReload))
+  watch(`${gulpPaths.src.base}**/*.{htm,html,json}`, series(html.dev, mainParams.IS_TAILWIND && styles.dev, previewReload))
+  watch([config.tailwindjs && config.tailwindjs, `${gulpPaths.src.base}**/*.scss`], series(styles.dev, previewHotReload))
+  watch(`${gulpPaths.src.js}**/*.js`, series(scripts.dev, previewReload))
+  watch(`${gulpPaths.src.images}`, series(images.dev, previewReload))
+  watch(`${gulpPaths.src.fonts}**/*`, series(fonts.dev, previewReload))
+  watch(gulpPaths.src.thirdParty, series(files.dev, previewReload))
 }
 
 
@@ -73,29 +63,29 @@ const previewHotReload = (done) => {
 }
 
 export const dev = series(
-  devClean,
-  parallel(devFonts, fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
+  cleans.dev,
+  parallel(fonts.dev, fonts.style, styles.dev, scripts.dev, images.dev, files.dev, html.dev),
   livePreview,
   watchFiles
 )
 
 export const devPhp = series(
-  devClean,
-  parallel(devFonts, fontsStyle, devStyles, devScripts, devImages, devThirdParty, devHTML),
+  cleans.dev,
+  parallel(fonts.dev, fonts.style, styles.dev, scripts.dev, images.dev, files.dev, html.dev),
   livePreviewPhp,
   watchFiles
 )
 
 export const prod = series(
-  prodClean,
-  parallel(prodFonts, fontsStyle, imageOptimize, prodStyles, prodScripts, prodHTMLNoWebp, prodThirdParty),
+  cleans.prod,
+  parallel(fonts.prod, fonts.style, images.prod, styles.prod, scripts.prod, html.prodNoWebp, files.prod),
   buildFinish
 )
 
 export const webp = series(
-  prodClean,
-  imageOptimize,
-  parallel(prodFonts, fontsStyle, prodStyles, imgWebp, prodScripts, prodHTML, prodThirdParty),
+  cleans.prod,
+  images.prod,
+  parallel(fonts.prod, fonts.style, styles.prod, images.prodWebp, scripts.prod, html.prodWebp, files.prod),
   buildFinish
 )
 

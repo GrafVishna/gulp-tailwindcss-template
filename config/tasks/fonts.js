@@ -12,13 +12,13 @@ import { gulpPaths } from "../../config.js"
 const { readdir } = fs
 const fontsDir = path.resolve(`src/fonts`)
 
-export const devFonts = (done) => {
+const devFonts = (done) => {
    otfToTtf()
    ttfToWoff2(gulpPaths.dist.fonts)
    woff2Copy(gulpPaths.dist.fonts)
    done()
 }
-export const prodFonts = (done) => {
+const prodFonts = (done) => {
    otfToTtf()
    ttfToWoff2(gulpPaths.build.fonts)
    woff2Copy(gulpPaths.build.fonts)
@@ -95,7 +95,7 @@ const woff2Copy = (processPath) => {
  * @param {void} none - No param needed.
  * @return {object} gulp - Gulp object.
  */
-export const fontsStyle = () => {
+const fontsStyle = () => {
    // Path to the fonts style file
    const fontsFile = `${gulpPaths.src.scss}fonts/fonts.scss`
 
@@ -189,4 +189,10 @@ export const fontsStyle = () => {
 
 function cb() { }
 
+
+export const fonts = {
+   dev: devFonts,
+   prod: prodFonts,
+   style: fontsStyle
+}
 

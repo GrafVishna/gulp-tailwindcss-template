@@ -25,7 +25,7 @@ const versions = {
  *
  * @return {object} The Gulp stream
  */
-export function devHTML() {
+function devHTML() {
    /*
    * Reads the source HTML file
    * Includes partials (header, footer, etc.)
@@ -34,7 +34,6 @@ export function devHTML() {
    return src([`${gulpPaths.src.base}*.html`])
       .pipe(fileinclude({ ...config.include }))
       .pipe(replaceAliasHTML())
-      .pipe(versionNumber({ ...versions }))
       .pipe(dest(gulpPaths.dist.base))
 }
 
@@ -45,7 +44,7 @@ export function devHTML() {
  *
  * @return {object} The Gulp stream
  */
-export function prodHTML() {
+function prodHTML() {
    /*
     * Reads the source HTML file.
     * Includes partials (header, footer, etc.)
@@ -69,7 +68,7 @@ export function prodHTML() {
  *
  * @return {object} The Gulp stream
  */
-export function prodHTMLNoWebp() {
+function prodHTMLNoWebp() {
    /*
    * Reads the source HTML file.
    * Includes partials (header, footer, etc.)
@@ -81,3 +80,9 @@ export function prodHTMLNoWebp() {
       .pipe(dest(gulpPaths.build.base))  // write resulting HTML to dist
 }
 //========================================================================================================================================================
+
+export const html = {
+   dev: devHTML,
+   prodWebp: prodHTML,
+   prodNoWebp: prodHTMLNoWebp
+}

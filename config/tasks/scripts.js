@@ -17,7 +17,7 @@ import { gulpPaths } from "../../config.js"
  * concatenated JS file that is saved to the destination directory (defined in
  * gulpPaths.dist.js).
  */
-export function devScripts() {
+function devScripts() {
    return src(`${gulpPaths.src.js}app.js`) // Globbing pattern to grab all JS files in src/js and their subdirectories
       .pipe(webpack({ config: webpackDev }))
       .pipe(dest(gulpPaths.dist.js)) // Save the resulting JS file to the destination directory
@@ -34,9 +34,14 @@ export function devScripts() {
  * minified JS file that is saved to the destination directory (defined in
  * gulpPaths.dist.js).
  */
-export function prodScripts() {
+function prodScripts() {
    return src(`${gulpPaths.src.js}app.js`) // Globbing pattern to grab all JS files in src/js and their subdirectories
       .pipe(webpack({ config: webpackProd })) // Pass them through Webpack in production mode with minification
       .pipe(dest(`${gulpPaths.build.js}`)) // Save the resulting minified JS file to the destination directory
 }
 //========================================================================================================================================================
+
+export const scripts = {
+   dev: devScripts,
+   prod: prodScripts
+}

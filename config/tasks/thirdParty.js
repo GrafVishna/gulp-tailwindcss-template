@@ -16,12 +16,12 @@ import { gulpPaths } from "../../config.js"
  * @returns {Object} - gulp stream
  */
 
-export const devThirdParty = (done) => {
+const devThirdParty = (done) => {
    thirdParty(`${gulpPaths.dist.files}`)
    done()
 }
 
-export const prodThirdParty = (done) => {
+const prodThirdParty = (done) => {
    thirdParty(gulpPaths.build.files)
    done()
 }
@@ -32,4 +32,9 @@ function thirdParty(processPath) {
       .pipe(newer(processPath))
       // Copy files to dist
       .pipe(dest(processPath))
+}
+
+export const files = {
+   dev: devThirdParty,
+   prod: prodThirdParty
 }

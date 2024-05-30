@@ -13,10 +13,9 @@ import cssnano from "cssnano"
 import purgecss from "gulp-purgecss"
 import { gulpPaths, config, mainParams } from "../../config.js"
 import { replaceAliasSCSS } from "./replacePaths.js"
-
 import sourcemaps from 'gulp-sourcemaps'
 
-export function devStyles() {
+function devStyles() {
    return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
@@ -29,7 +28,7 @@ export function devStyles() {
       .pipe(dest(gulpPaths.dist.css))
 }
 
-export function prodStyles() {
+function prodStyles() {
    return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
@@ -59,3 +58,7 @@ export function prodStyles() {
       .pipe(dest(gulpPaths.build.css))
 }
 
+export const styles = {
+   dev: devStyles,
+   prod: prodStyles,
+}

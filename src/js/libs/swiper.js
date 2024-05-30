@@ -5,7 +5,7 @@ import Swiper from 'swiper'
 
 // Base styles ====================================================================================
 
-// import '../../scss/libs/swiper-base.scss'
+import '../../scss/libs/swiper-base.scss'
 
 // Modules: =======================================================================================
 // Navigation, Pagination, Autoplay, EffectFade, Lazy, Manipulation
@@ -22,6 +22,7 @@ function initSliders() {
       const swiper = new Swiper(".swiper", {
          modules: [Navigation, Autoplay],
          spaceBetween: 30,
+         slidesPerView: 1,
          loop: true,
          speed: 800,
          autoplay: {
