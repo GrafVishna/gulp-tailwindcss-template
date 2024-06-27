@@ -1,6 +1,6 @@
 export const mainParams = {
   IS_LOG: true,
-  IS_TAILWIND: true,
+  IS_TAILWIND: false,
   WEBP_COMPRESS: 80,
   JPEG_COMPRESS: 80,
   PNG_COMPRESS: [0.7, 0.7],
@@ -36,12 +36,12 @@ export const config = {
 }
 
 
-// tailwind plugins
-export const plugins = {
-  typography: true,
-  forms: true,
-  containerQueries: true,
-}
+// // tailwind plugins
+// export const plugins = {
+//   typography: true,
+//   forms: true,
+//   containerQueries: true,
+// }
 
 // Project Paths
 const buildFolder = `./build`

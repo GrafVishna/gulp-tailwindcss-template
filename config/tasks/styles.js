@@ -10,13 +10,13 @@ import sassGlob from 'gulp-sass-glob'
 import postcss from "gulp-postcss"
 import concat from "gulp-concat"
 import cssnano from "cssnano"
-import purgecss from "gulp-purgecss"
+import purgecss from "@fullhuman/postcss-purgecss"
 import { gulpPaths, config, mainParams } from "../../config.js"
 import { replaceAliasSCSS } from "./replacePaths.js"
 import sourcemaps from 'gulp-sourcemaps'
 
 function devStyles() {
-   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
+   return src([`${gulpPaths.src.scss}style.scss`])
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
       .pipe(sass().on("error", sass.logError))
@@ -29,29 +29,27 @@ function devStyles() {
 }
 
 function prodStyles() {
-   return src([`${gulpPaths.src.scss}style.scss`, `${gulpPaths.src.components}**/*.scss`])
+   return src([`${gulpPaths.src.scss}style.scss`])
       .pipe(sourcemaps.init())
       .pipe(sassGlob())
       .pipe(sass().on("error", sass.logError))
-      .pipe(
-         postcss([
-            mainParams.IS_TAILWIND && tailwindcss(config.tailwindjs),
-            autoprefixer(),
-            cssnano(),
-         ])
-      )
-      .pipe(
+
+      .pipe(postcss([
+         mainParams.IS_TAILWIND && tailwindcss(config.tailwindjs),
+         autoprefixer(),
+         cssnano(),
          purgecss({
             ...config.purgecss,
             defaultExtractor: (content) => {
-               const v3Regex = /[(\([&*\])|\w)-:./]+(?<!:)/g
+               const v3Regex = /[(\([&*\])|\w)-:./]+(?<!:)/
                const broadMatches = content.match(v3Regex) || []
-               const innerMatches =
-                  content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
+               const innerMatches = content.match(/[^<>"'`\s.()]*[^<>"'`\s.():]/g) || []
                return broadMatches.concat(innerMatches)
             },
          })
-      )
+
+      ].filter(Boolean)))
+
       .pipe(replaceAliasSCSS())
       .pipe(concat({ path: "style.css" }))
       .pipe(sourcemaps.write('.'))
