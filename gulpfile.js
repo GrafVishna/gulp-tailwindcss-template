@@ -42,7 +42,7 @@ function livePreviewPhp(done) {
 }
 
 function watchFiles() {
-  watch(`${gulpPaths.src.base}**/*.{htm,html,json}`, series(html.dev, styles.dev, previewReload))
+  watch(`${gulpPaths.src.base}**/*.{htm,html,json,js}`, series(html.dev, styles.dev, previewReload))
   watch(
     config.IS_TAILWIND
       ? [config.tailwindjs, `${gulpPaths.src.base}**/*.scss`]

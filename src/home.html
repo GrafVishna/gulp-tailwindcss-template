@@ -8,7 +8,31 @@
          @@include('src/components/global/header/_header.html', {})
          <main class="page p-10">
             <!-- Content start -->
+            <div data-tabs class="tabs">
+               <nav data-tabs-titles class="tabs__navigation">
+                  <button type="button" class="tabs__title _tab-active">Таб №1</button>
+                  <button type="button" class="tabs__title">Таб №2</button>
+                  <button type="button" class="tabs__title">Таб №3</button>
+               </nav>
+               <div data-tabs-body class="tabs__content">
+                  <div class="tabs__body">
+                     Вміст першого таба
+                  </div>
+                  <div class="tabs__body">
+                     Вміст другого таба
+                  </div>
+                  <div class="tabs__body">
+                     Вміст третього таба
+                  </div>
+               </div>
+            </div>
 
+            <div data-spollers class="spollers">
+               <details class="spollers__item">
+                  <summary class="spollers__title">Заголовок спойлера</summary>
+                  <div class="spollers__body">Контент спойлера</div>
+               </details>
+            </div>
             <!-- Content end -->
          </main>
          <!-- Footer -->

@@ -76,6 +76,17 @@ import "./libs/gsap.js"
 // import "./libs/menu-slide.js"
 
 // ===============================================
+/* Spoiler functionality */
+import "./functions/spollers.js"
+
+// ===============================================
+
+/* Tabs functionality */
+import "./functions/tabs.js"
+
+// ===============================================
+
+// ===============================================
 /* Format your <input/> content when you are typing */
 // Documentation https://nosir.github.io/cleave.js/
 
