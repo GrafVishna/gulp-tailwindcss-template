@@ -77,12 +77,13 @@ import "./libs/gsap.js"
 
 // ===============================================
 /* Spoiler functionality */
-import "./functions/spollers.js"
+// Documentation inside the module file
+import "./libs/spoilers.js"
 
 // ===============================================
 
 /* Tabs functionality */
-import "./functions/tabs.js"
+// import "./functions/tabs.js"
 
 // ===============================================
 

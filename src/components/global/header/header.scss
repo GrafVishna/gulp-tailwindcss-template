@@ -1,11 +1,11 @@
 //Currency
 .header {
-   span {
-      color: red;
-      display: block;
-      font-size: toEm(50);
-      padding: toRem(50);
-   }
+   color: red;
+   display: block;
+   font-size: toEm(50);
+   padding: toRem(50);
+   background: #000;
+   border: toRem(2) solid #fff;
 }
 
 .test-classs {

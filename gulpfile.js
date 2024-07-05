@@ -50,7 +50,7 @@ function watchFiles() {
     series(styles.dev, previewHotReload)
   )
 
-  watch(`${gulpPaths.src.js}**/*.js`, series(scripts.dev, previewReload))
+  watch(`${gulpPaths.src.js}**/*.js`, series(scripts.dev, styles.dev, previewReload))
   watch(`${gulpPaths.src.images}`, series(images.dev, previewReload))
   watch(`${gulpPaths.src.fonts}**/*`, series(fonts.dev, previewReload))
   watch(gulpPaths.src.thirdParty, series(files.dev, previewReload))
@@ -84,7 +84,8 @@ export const devPhp = series(
 
 export const prod = series(
   cleans.prod,
-  parallel(fonts.prod, fonts.style, images.prod, styles.prod, scripts.prod, html.prodNoWebp, files.prod),
+  parallel(fonts.prod, fonts.style, html.prodNoWebp, images.prod, styles.prod, scripts.prod, files.prod),
+  styles.purge,
   buildFinish
 )
 
@@ -92,6 +93,7 @@ export const webp = series(
   cleans.prod,
   images.prod,
   parallel(fonts.prod, fonts.style, styles.prod, images.prodWebp, scripts.prod, html.prodWebp, files.prod),
+  styles.purge,
   buildFinish
 )
 

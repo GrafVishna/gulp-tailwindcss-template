@@ -1,7 +1,7 @@
 import * as path from 'path'
-import { gulpPaths } from "../config.js"
-// =========================================================================================================================
-// todo Config JS
+import { gulpPaths } from '../config.js'
+
+// Config JS
 const configJs = {
    test: /\.js$/,
    exclude: /node_modules/,
@@ -13,14 +13,14 @@ const configJs = {
    },
 }
 
-const srcFolder = "src"
-const distFolder = ".tmp"
+const srcFolder = 'src'
+const distFolder = '.tmp'
 const paths = {
    src: path.resolve(srcFolder),
-   dist: path.resolve(distFolder)
+   dist: path.resolve(distFolder),
 }
 
-// todo Config CSS & SCSS
+// Config CSS & SCSS
 const configStyles = {
    test: /\.(scss|css)$/,
    exclude: path.resolve(new URL('.', import.meta.url).pathname, gulpPaths.src.fonts),
@@ -48,7 +48,7 @@ const configStyles = {
    ],
 }
 
-// todo Images
+// Config Images
 const configImages = {
    test: /\.(png|jpg|jpeg|gif|svg)$/,
    type: 'asset/resource',
@@ -57,8 +57,7 @@ const configImages = {
    },
 }
 
-// =========================================================================================================================
-
+// Webpack Configuration
 const webpackDev = {
    mode: 'development',
    cache: true,
@@ -71,11 +70,11 @@ const webpackDev = {
    },
    output: {
       filename: 'app.js',
+      path: paths.dist, // Шлях до вихідного каталогу
    },
    performance: {
-      hints: false
-   }
+      hints: false,
+   },
 }
-
 
 export { webpackDev }

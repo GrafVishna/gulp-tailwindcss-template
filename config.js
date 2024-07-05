@@ -10,7 +10,7 @@ export const config = {
   tailwindjs: "./tailwind.config.js",
   port: 4000,
   purgecss: {
-    content: ["src/**/*.{html,htm,js,php}"],
+    content: ["build/**/*.{js,php}", "build/*.html"],
     safelist: {
       standard: [/^pre/, /^code/],
       greedy: [/token.*/],
