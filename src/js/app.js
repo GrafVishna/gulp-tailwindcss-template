@@ -78,7 +78,14 @@ import "./libs/gsap.js"
 // ===============================================
 /* Spoiler functionality */
 // Documentation inside the module file
+
 // import "./libs/spoilers.js"
+
+// ===============================================
+
+/* Select functionality */
+// Documentation inside the module file
+
 import "./libs/select.js"
 
 // ===============================================
