@@ -1,0 +1,75 @@
+"Spoiler Div": {
+      "prefix": "spoilerFE",
+      "body": [
+         "<div class='spoiler' data-spoiler>",
+         "   <div class='spoiler__panel' data-spoiler-title>",
+         "      <div class='spoiler__text'>${1:Title}</div>",
+         "      <span class='spoiler__icon'>",
+         "         <svg stroke='currentColor' fill='none' stroke-width='2' viewBox='0 0 24 24' stroke-linecap='round' stroke-linejoin='round' xmlns='http://www.w3.org/2000/svg'><polyline points='6 9 12 15 18 9'></polyline></svg>",
+         "      </span>",
+         "   </div>",
+         "   <div class='spoiler__content' data-spoiler-content>",
+         "      <div class='spoiler__body'>",
+         "         ${2:Content}",
+         "      </div>",
+         "   </div>",
+         "</div>"
+      ],
+      "description": "Creates a spoiler div structure"
+},
+"Include": {
+		"scope": "html",
+		"prefix": "inc",
+		"body": [
+			"@@include('src/components/$1', {})"
+		],
+		"description": "Include"
+	},
+	"Loop1": {
+		"scope": "html",
+		"prefix": "loop1",
+		"body": [
+			"@@loop('src/components/$1', [\n\t\t{ \"title\": \"Title\", \"text\": \" Text \" },\n])"
+		],
+		"description": "loop statement"
+	},
+	"Loop2": {
+		"scope": "html",
+		"prefix": "loop2",
+		"body": [
+			"@@loop('src/components/$1', '/components/elements/data.json')"
+		],
+		"description": "loop statement (json)"
+	},
+	"If": {
+		"scope": "html",
+		"prefix": "if",
+		"body": [
+			"@@if (name === 'test' && nav === true) {\n\t\t@@include('src/components/$1')\n}"
+		],
+		"description": "if statement"
+	},
+	"IfParams": {
+		"scope": "html",
+		"prefix": "ifp",
+		"body": [
+			"@@if(typeof $1 !== 'undefined') { @@$1 }"
+		],
+		"description": "if params"
+	},
+	"For": {
+		"scope": "html",
+		"prefix": "for",
+		"body": [
+			"@@for (var i = 0; i <  5;  i++)  {\n\t\t@@include('/components/$1')\n}"
+		],
+		"description": "for statement"
+	},
+	"Adaptiv Size": {
+		"scope": "scss",
+		"prefix": "asz",
+		"body": [
+			"@include adaptiveSize('${1:font-size}', '$2', $3);"
+		 ],
+	"description": "Властивість, знак ділення чи множення, число на яке ділити чи множити"
+	},

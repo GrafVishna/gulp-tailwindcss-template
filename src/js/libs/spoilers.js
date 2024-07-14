@@ -1,11 +1,11 @@
 import FESpoilers from '../functions/FESpoilers.js'
 
-// data-spoiler               : тіло спойлера
-// data-spoiler-title         : заголовок спойлера (кнопка відкриття)
-// data-spoiler-content       : вміст спойлера (тіло що відкривається)
-// data-spoiler-group="A"     : група спойлерів (A, B, C) (спойлери з однаковою групою відкриваються одночасно)
-// data-spoiler-state="hide"  : стан спойлера (show, hide) (спойлери станом show відкриваються при завантаженні сторінки)
-// data-spoiler-resize="768"  : розмір спойлера (768px) (спойлери ініціалізуються при досягнені вказаного екрану))
+// data-spoiler               : spoiler body
+// data-spoiler-title         : spoiler title (open button)
+// data-spoiler-content       : spoiler content (body that opens)
+// data-spoiler-group="A"     : spoiler group (A, B, C) (spoilers with the same group open simultaneously)
+// data-spoiler-state="hide"  : spoiler state (show, hide) (spoilers with state show open when the page loads)
+// data-spoiler-resize="768"  : spoiler size (768px) (spoilers initialize when the specified screen size is reached)
 
 FESpoilers('[data-spoiler]', {
    contentSelector: "[data-spoiler-content]",
