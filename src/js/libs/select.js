@@ -1,16 +1,13 @@
 // Підключення функціоналу "Чортоги Фрілансера"
 import { isMobile, _slideUp, _slideDown, _slideToggle } from "../functions/functions.js"
+import allCountries from './all-countries.js'
 
 // Підключення файлу стилів
 // Базові стилі полягають у src/scss/forms.scss
 // Файл базових стилів src/scss/forms/select.scss
 
 /*
-Документація:
-Сніппет (HTML): sel
-*/
-/*
-// Налаштування
+
 Для селекту (select):
 class="ім'я класу" - модифікатор до конкретного селекту
 multiple - мультивибір
@@ -35,12 +32,10 @@ data-class="ім'я класу" - додає клас
 data-asset="шлях до картинки або текст" - додає структуру 2х колонок та даними
 data-href="адреса посилання" - додає посилання в елемент списку
 data-href-blank - відкриє посилання у новому вікні
+
+data-select-countries
 */
 
-/*
-// Можливі доопрацювання:
-попап на мобілці
-*/
 
 // Клас побудови Select
 class SelectConstructor {
@@ -81,12 +76,13 @@ class SelectConstructor {
       // Запуск ініціалізації
       if (this.config.init) {
          // Отримання всіх select на сторінці
-         const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll('select')
+         const selectItems = data ? document.querySelectorAll(data) : document.querySelectorAll('[data-select]')
          if (selectItems.length) {
             this.selectsInit(selectItems)
          }
       }
    }
+
    // Конструктор CSS класу
    getSelectClass(className) {
       return `.${className}`
@@ -101,7 +97,18 @@ class SelectConstructor {
    // Функція ініціалізації всіх селектів
    selectsInit(selectItems) {
       selectItems.forEach((originalSelect, index) => {
-         this.selectInit(originalSelect, index + 1)
+         if (originalSelect.hasAttribute('data-select-countries')) {
+            allCountries.forEach(country => {
+               const option = document.createElement('option')
+               option.value = country.nameCommon
+               option.dataset.flag = country.flag
+               option.textContent = country.nameCommon
+               originalSelect.append(option)
+            })
+            this.selectInit(originalSelect, index + 1)
+         } else {
+            this.selectInit(originalSelect, index + 1)
+         }
       })
       // Обробники подій...
       // ...при кліку
@@ -129,12 +136,18 @@ class SelectConstructor {
       selectItem.classList.add(this.selectClasses.classSelect)
       // Виводимо оболонку перед оригінальним селектом
       originalSelect.parentNode.insertBefore(selectItem, originalSelect)
-      // Поміщаємо оригінальний селект в оболонку
-      selectItem.appendChild(originalSelect)
+
       // Приховуємо оригінальний селект
       originalSelect.hidden = true
       // Привласнюємо унікальний ID
       index ? originalSelect.dataset.id = index : null
+
+      if (originalSelect.hasAttribute('data-select-countries')) {
+         selectItem.classList.add('select-countries')
+      }
+
+      // Поміщаємо оригінальний селект в оболонку
+      selectItem.appendChild(originalSelect)
 
       // Робота з плейсхолдером
       if (this.getSelectPlaceholder(originalSelect)) {
@@ -279,6 +292,7 @@ class SelectConstructor {
    }
    // Конструктор значення заголовка
    getSelectTitleValue(selectItem, originalSelect) {
+      const flagSlug = this.getSelectedOptionsData(originalSelect).elements.map(option => option.dataset.flag)
       // Отримуємо вибрані текстові значення
       let selectTitleValue = this.getSelectedOptionsData(originalSelect, 2).html
       // Обробка значень мультивибору
@@ -291,8 +305,10 @@ class SelectConstructor {
             if (originalSelect.hasAttribute('data-search')) selectTitleValue = false
          }
       }
+
       // Значення або плейсхолдер
       selectTitleValue = selectTitleValue.length ? selectTitleValue : (originalSelect.dataset.placeholder ? originalSelect.dataset.placeholder : '')
+
       // Якщо увімкнено режим pseudo
       let pseudoAttribute = ''
       let pseudoAttributeClass = ''
@@ -310,7 +326,18 @@ class SelectConstructor {
          // Якщо вибрано елемент зі своїм класом
          const customClass = this.getSelectedOptionsData(originalSelect).elements.length && this.getSelectedOptionsData(originalSelect).elements[0].dataset.class ? ` ${this.getSelectedOptionsData(originalSelect).elements[0].dataset.class}` : ''
          // Виводимо текстове значення
-         return `<button type="button" class="${this.selectClasses.classSelectTitle}"><span${pseudoAttribute} class="${this.selectClasses.classSelectValue}${pseudoAttributeClass}"><span class="${this.selectClasses.classSelectContent}${customClass}">${selectTitleValue}</span></span></button>`
+
+         return `
+         <button type="button" class="${this.selectClasses.classSelectTitle}">
+            <span${pseudoAttribute} class="${this.selectClasses.classSelectValue}${pseudoAttributeClass}">
+               ${originalSelect.hasAttribute('data-select-countries') ? `<span class="select__flag-icon fi fi-${flagSlug}"></span>` : ''}
+               <span class="${this.selectClasses.classSelectContent}${customClass}">
+                  ${selectTitleValue}
+               </span>
+            </span>
+         </button>
+      `
+
       }
    }
    // Конструктор даних для значення заголовка
@@ -386,22 +413,47 @@ class SelectConstructor {
    }
    // Конструктор конкретного елемента списку
    getOption(selectOption, originalSelect) {
-      // Якщо елемент вибрано та увімкнено режим мультивибору, додаємо клас
-      const selectOptionSelected = selectOption.selected && originalSelect.multiple ? ` ${this.selectClasses.classSelectOptionSelected}` : ''
-      // Якщо елемент вибраний і немає налаштування data-show-selected, приховуємо елемент
-      const selectOptionHide = selectOption.selected && !originalSelect.hasAttribute('data-show-selected') && !originalSelect.multiple ? `hidden` : ``
-      // Якщо для елемента зазначений клас додаємо
-      const selectOptionClass = selectOption.dataset.class ? ` ${selectOption.dataset.class}` : ''
-      // Якщо вказано режим посилання
-      const selectOptionLink = selectOption.dataset.href ? selectOption.dataset.href : false
-      const selectOptionLinkTarget = selectOption.hasAttribute('data-href-blank') ? `target="_blank"` : ''
-      // Будуємо та повертаємо конструкцію елемента
-      let selectOptionHTML = ``
-      selectOptionHTML += selectOptionLink ? `<a ${selectOptionLinkTarget} ${selectOptionHide} href="${selectOptionLink}" data-value="${selectOption.value}" class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}">` : `<button ${selectOptionHide} class="${this.selectClasses.classSelectOption}${selectOptionClass}${selectOptionSelected}" data-value="${selectOption.value}" type="button">`
-      selectOptionHTML += this.getSelectElementContent(selectOption)
-      selectOptionHTML += selectOptionLink ? `</a>` : `</button>`
-      return selectOptionHTML
+      const {
+         classSelectOption,
+         classSelectOptionSelected
+      } = this.selectClasses
+      const {
+         selected,
+         value,
+         dataset: { class: optionClass, href: optionHref, flag: optionFlag }
+      } = selectOption
+      const isMultiple = originalSelect.multiple
+
+      const selectOptionSelected = selected && isMultiple ? ` ${classSelectOptionSelected}` : ''
+      const selectOptionHide = selected && !originalSelect.hasAttribute('data-show-selected') && !isMultiple ? 'hidden' : ''
+      const selectOptionClass = optionClass ? ` ${optionClass}` : ''
+      const selectOptionLink = optionHref || false
+      const selectOptionLinkTarget = optionHref && selectOption.hasAttribute('data-href-blank') ? 'target="_blank"' : ''
+
+      const content = this.getSelectElementContent(selectOption)
+      const flagElement = optionFlag ? `<span class="fi fi-${optionFlag}"></span>` : ''
+
+      const commonAttributes = `
+         ${selectOptionHide}
+         data-value="${value}"
+         class="${classSelectOption}${selectOptionClass}${selectOptionSelected}"
+      `.trim()
+
+      const anchorTag = `
+         <a ${selectOptionLinkTarget} ${commonAttributes} href="${selectOptionLink}">
+            ${flagElement}${content}
+         </a>
+      `
+
+      const buttonTag = `
+         <button ${commonAttributes} type="button">
+            ${flagElement}${content}
+         </button>
+      `
+
+      return optionHref ? anchorTag : buttonTag
    }
+
    // Сеттер елементів списку (options)
    setOptions(selectItem, originalSelect) {
       // Отримуємо об'єкт тіла псевдоселекту
@@ -543,6 +595,11 @@ class SelectConstructor {
    }
 }
 // Запускаємо та додаємо в об'єкт модулів
-const newSelect = new SelectConstructor({});
+const newSelect = new SelectConstructor({})
+
+
+
+//========================================================================================================================================================
+
 
 
