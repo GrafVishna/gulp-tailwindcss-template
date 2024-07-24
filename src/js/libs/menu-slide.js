@@ -12,7 +12,7 @@ function menuSlide(params) {
    var slideout = new Slideout({
       'panel': panelEl,
       'menu': menuEl,
-      'padding': 256,
+      'padding': 0,
       'tolerance': 70
    })
 

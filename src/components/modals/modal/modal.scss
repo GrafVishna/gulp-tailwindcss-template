@@ -1,55 +1,56 @@
 .modal {
-}
-
-.modal__overlay {
    position: fixed;
    z-index: 100;
    top: 0;
    left: 0;
    right: 0;
    bottom: 0;
-   background: rgba(0, 0, 0, 0.6);
-   display: flex;
-   justify-content: center;
-   align-items: center;
+
+   &__overlay {
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+   }
+
+   &__container {
+      background-color: #fff;
+      padding: 30px;
+      max-width: 500px;
+      max-height: 100vh;
+      border-radius: 4px;
+      overflow-y: auto;
+      box-sizing: border-box;
+   }
+
+   &__header {
+      display: flex;
+      justify-content: end;
+      align-items: center;
+      .modal__close:before {
+         content: "\2715";
+      }
+   }
+
+   &__close {
+      background: transparent;
+      border: 0;
+   }
+
+   &__content {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      line-height: 1.5;
+      color: rgba(0, 0, 0, 0.8);
+   }
 }
 
-.modal__container {
-   background-color: #fff;
-   padding: 30px;
-   max-width: 500px;
-   max-height: 100vh;
-   border-radius: 4px;
-   overflow-y: auto;
-   box-sizing: border-box;
-}
-
-.modal__header {
-   display: flex;
-   justify-content: end;
-   align-items: center;
-}
-
-.modal__close {
-   background: transparent;
-   border: 0;
-   color: red;
-}
-
-.modal__header .modal__close:before {
-   content: "\2715";
-}
-
-.modal__content {
-   margin-top: 2rem;
-   margin-bottom: 2rem;
-   line-height: 1.5;
-   color: rgba(0, 0, 0, 0.8);
-}
-
-/**************************\
-   Demo Animation Style
- \**************************/
 @keyframes mmfadeIn {
    from {
       opacity: 0;
@@ -86,14 +87,6 @@
    }
 }
 
-.modal {
-   display: none;
-}
-
-.modal.is-open {
-   display: block;
-}
-
 .modal[aria-hidden="false"] .modal__overlay {
    animation: mmfadeIn 0.3s cubic-bezier(0, 0, 0.2, 1);
 }
@@ -113,4 +106,18 @@
 .modal .modal__container,
 .modal .modal__overlay {
    will-change: transform;
+}
+
+//========================================================================================================================================================
+
+.modal {
+   opacity: 0;
+   visibility: hidden;
+   pointer-events: none;
+}
+
+.modal.is-open {
+   opacity: 1;
+   visibility: visible;
+   pointer-events: all;
 }

@@ -1,3 +1,4 @@
+import * as TF from "./functions/functions.js"
 // ===============================================
 // todo Libraries.To connect the foot library, display imports!
 // ===============================================
@@ -76,6 +77,13 @@ import "./libs/gsap.js"
 // import "./libs/menu-slide.js"
 
 // ===============================================
+/* A touch FLS navigation menu */
+// Documentation inside the module file
+
+// TF.menuInit()
+
+// ===============================================
+
 /* Spoiler functionality */
 // Documentation inside the module file
 
@@ -86,8 +94,7 @@ import "./libs/gsap.js"
 /* Select functionality */
 // Documentation inside the module file
 
-import "./libs/select.js"
-// import "./coutries.js"
+// import "./libs/select.js"
 
 // ===============================================
 

@@ -1,14 +1,24 @@
 import MicroModal from "micromodal"
+import { bodyLock, bodyUnlock } from "../functions/functions.js"
 
 MicroModal.init({
-   onShow: modal => console.info(`${modal.id} is shown`),
-   onClose: modal => console.info(`${modal.id} is hidden`),
+   onShow: modal => callbackOpen(modal),
+   onClose: modal => callbackClose(modal),
    openTrigger: 'data-modal-open',
    closeTrigger: 'data-modal-close',
    openClass: 'is-open',
-   disableScroll: true,
-   disableFocus: false,
+   disableFocus: true,
    awaitOpenAnimation: false,
-   awaitCloseAnimation: false,
+   awaitCloseAnimation: true,
    debugMode: true
 })
+
+
+const callbackOpen = (modal) => {
+   bodyLock(300)
+   console.info(`${modal.id} is shown`)
+}
+const callbackClose = (modal) => {
+   console.info(`${modal.id} is hidden`)
+   bodyUnlock(300)
+}

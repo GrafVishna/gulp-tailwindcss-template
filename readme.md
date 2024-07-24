@@ -6,6 +6,7 @@
 
 - Easy configuration using `config.js`
 - Live reload on file/assets changes using `browser-sync`
+- Support for PHP server with real-time reloading when files/assets are changed using browser synchronization
 - SCSS support
 - Minification of styles and scripts on production build
 - Image conversion into Webp Format and automatic creation of Picture Tag in the assembly `gulp-webp`
@@ -37,20 +38,10 @@ Start development server and PHP server with live preview
 yarn php // or // npm run php
 ```
 
-Generate build files for production server
-
-```sh
-yarn dev // or // npm run dev (No Webp)
-```
-
-Build a project without converting images (optimization only)
+Build a project without converting images (optimization only) (No Webp)
 yarn (No Webp)
 ```sh
-yarn build
-```
-npm (No Webp)
-```sh
-npm run build
+yarn build // or // npm run build
 ```
 
 Build a project with image conversion and optimization
@@ -73,14 +64,6 @@ export const mainParams = {
   JPEG_COMPRESS: 80,
   PNG_COMPRESS: [0.7, 0.7],
 }
-
-// tailwind plugins
-// set to false to disable
-const plugins = {
-  typography: true,
-  forms: true,
-  containerQueries: true,
-};
 ...
 ```
 #
@@ -88,36 +71,6 @@ const plugins = {
 # Documentation on work with a template
 
 ### Use already connected to the libraries template those other functionality:
-
-#### Install dev dependencies
-
-```sh
-yarn add // or // npm install
-```
-
-Start development server with live preview
-
-```sh
-yarn dev // or // npm run dev
-```
-
-#### Generate build files for production server
-
-```sh
-yarn dev // or // npm run dev (No Webp)
-```
-
-Build a project without converting images (optimization only)
-
-```sh
-yarn build // or // npm run build (No Webp)
-```
-
-Build a project with image conversion and optimization
-
-```sh
-yarn webp // or // npm run webp (Webp)
-```
 
 #### ALIASES:
 
@@ -166,14 +119,19 @@ To create a component, you need to create a component directory.
 ```sh
 |--|src/
 |-----|components/
-|---------| header/
-|-------------| _header.html
-|-------------| header.scss
-|-------------| header.json
-|---------| footer/
-|-------------| _footer.html
-|-------------| footer.scss
-|-------------| footer.json
+|--------|global/
+|-----------| header/
+|--------------| _header.html
+|--------------| header.scss
+|--------------| header.json
+|-----------| footer/
+|--------------| _footer.html
+|--------------| footer.scss
+|--------------| footer.json
+|--------|modals/
+|-----------|modal-auth/
+|--------------| _modal-auth.html
+|--------------| modal-auth.scss
 ``` 
 
 The style files created in the component directory are automatically included and do not require manual importing.
@@ -227,9 +185,9 @@ File content "_user-card.htm":
   ])
 ```
 
-- Example of Connection "user-card.html" with the .json file ":
+- Example of Connection "user-card.html" with the .json file:
 ```html
-@@loop("src/components/global/user-card/_user-card.htm", "components/global/user-card/user-card.json")
+@@loop("src/components/global/user-card/_user-card.htm", "/components/global/user-card/user-card.json")
 ```
 File content "user-card.json":
 ```json
@@ -240,6 +198,3 @@ File content "user-card.json":
 ]
 ```
 
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
